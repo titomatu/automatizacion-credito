@@ -14,6 +14,7 @@ public class SolicitudDto {
     private Double valorSolicitado;
     private Double valorAprobado;
     private Double promedioAportes;
+    private int plazo;
     private String reportado;
     private String mensaje;
 }

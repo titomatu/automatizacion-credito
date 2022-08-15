@@ -33,6 +33,9 @@ public class MotorReglaRequestDto {
     private	String	estadoCivil;
     private String  aprobadoCentral;
     private Double  salarioAportes;
+    private Double  valorSolicitado;
+    private int     plazo;
+    private Double  gastos;
     private long    valorAprobado;
     private String  numeroSolicitud;
     private int     codeRespuesta;

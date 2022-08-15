@@ -11,7 +11,6 @@ import edu.patrones.demo.event.estudio.EstudioStatus;
 import edu.patrones.demo.event.solicitud.SolicitudEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.ProducerTemplate;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,9 +40,12 @@ public class EstudioService {
         motorReglaRequestDto.setFechaExpedicion(solicitudDto.getClienteDto().getFechaExpedicion());
         motorReglaRequestDto.setFechaNacimiento(solicitudDto.getClienteDto().getFechaNacimiento());
         motorReglaRequestDto.setSalarioMensual(solicitudDto.getClienteDto().getSalarioMensual());
+        motorReglaRequestDto.setGastos(solicitudDto.getClienteDto().getGastos());
         motorReglaRequestDto.setSalarioAportes(solicitudDto.getPromedioAportes());
         motorReglaRequestDto.setAprobadoCentral(solicitudDto.getReportado());
         motorReglaRequestDto.setNumeroSolicitud(solicitudDto.getNumeroSolicitud());
+        motorReglaRequestDto.setValorSolicitado(solicitudDto.getValorSolicitado());
+        motorReglaRequestDto.setPlazo(solicitudDto.getPlazo());
 
         producerTemplate.start();
         InputStream inputStream = producerTemplate.requestBody("direct:motor", motorReglaRequestDto, InputStream.class);

@@ -13,5 +13,6 @@ public class MotorReglaResponseDto {
     private String numeroSolicitud;
     private long valorAprobado;
     private int codeRespuesta;
+    private double valorCuota;
     private String mensajeS;
 }
