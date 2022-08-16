@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Solicitud de Crédito</title>
+    <link rel="stylesheet" href="css/app.css">
+    <!-- Bootstrap core CSS -->
+    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="root">
+    <form th:action="@{/radicar}" class="form-register" method="post" id="formulario">
+        <div class="form-register__header">
+            <ul class="progressbar">
+                <li class="progressbar__option active">paso 1</li>
+                <li class="progressbar__option">paso 2</li>
+                <li class="progressbar__option">paso 3</li>
+            </ul>
+            <h1 class="form-register__title">Solicitud De Credito</h1>
+        </div>
+        <div class="form-register__body">
+            <div class="step active" id="step-1">
+                <div class="step__header">
+                    <h2 class="step__title">Datos Personales<small>(Paso 1)</small></h2>
+                </div>
+                <div class="step__body">
+                    <input type="hidden" name="mensaje" placeholder="" th:value="${mensaje}"  class="step__input" required id="mensaje">
+                    <select name="cliente.tipoDocumento" class="step__input" aria-label="Default select example">
+                        <option selected>TIPO DE DOCUMENTO</option>
+                        <option value="CC">CC</option>
+                        <option value="CC">CE</option>
+                    </select>
+                    <input type="text" name="cliente.numeroDocumento" placeholder="Numero Documento" class="step__input" required>
+                    <input type="text" name="cliente.fechaExpedicion" placeholder="Fecha Expedición YYYY/MM/DD" class="step__input" required>
+                    <input type="text" name="cliente.nombre1" placeholder="Primer Nombre" class="step__input" required>
+                    <input type="text" name="cliente.nombre2" placeholder="Segundo Nombre (opcional)" class="step__input" required>
+                    <input type="text" name="cliente.apellido1" placeholder="Primer Apellido" class="step__input" required>
+                    <input type="text" name="cliente.apellido2" placeholder="Segundo Apellido (opcional)" class="step__input" required>
+                    <select  name="cliente.genero" class="step__input" aria-label="Default select example" required>
+                        <option selected>Genero</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                        <option value="X">Binario</option>
+                    </select>
+                </div>
+                <div class="step__footer">
+                    <button type="button" class="step__button step__button--next" data-to_step="2" data-step="1" id="btn-sig1">Siguiente</button>
+                </div>
+            </div>
+            <div class="step" id="step-2">
+                <div class="step__header">
+                    <h2 class="step__title" >Datos personales<small>(Paso 2)</small></h2>
+                </div>
+                <div class="step__body">
+                    <input type="text" name="cliente.fechaNacimiento" placeholder="fechaNacimiento YYYY/MM/DD" class="step__input" required>
+                    <input type="number" name="cliente.celular" placeholder="Celular" class="step__input" required>
+                    <input type="email" name="cliente.correoElectronico" placeholder="Correo Electronico" class="step__input" required>
+                    <select name="cliente.estadoCivil" class="step__input" aria-label="Default select example" required>
+                        <option selected>Estado Civil</option>
+                        <option value="C">Casado</option>
+                        <option value="V">Viudo</option>
+                        <option value="T">Soltero</option>
+                        <option value="U">Unión Libre</option>
+                        <option value="S">Separado</option>
+                    </select>
+                    <select  name="cliente.tipoInmueble"  class="step__input" aria-label="Default select example" required>
+                        <option selected>Tipo Inmueble</option>
+                        <option value="N">Ninguno</option>
+                        <option value="C">Casa</option>
+                        <option value="A">Apartamento</option>
+                        <option value="B">Bodega</option>
+                    </select>
+                    <select name="cliente.tipoResidencia" class="step__input" aria-label="Default select example" required>
+                            <option selected>Tipo Residencia</option>
+                        <option value="F">Familia</option>
+                        <option value="P">Propia sin Hipoteca</option>
+                        <option value="H">Propia con Hipoteca</option>
+                        <option value="A">Arrendada</option>
+                    </select>
+                    <div class="text-center">
+                        <label>
+                            <input type="checkbox" name="cliente.autorizaCentrales" value="remember-me" required> Autoriza centrales
+                        </label>
+                    </div>
+                </div>
+                <div class="step__footer">
+                    <button type="button" class="step__button step__button--back" data-to_step="1" data-step="2">Regresar</button>
+                    <button type="button" class="step__button step__button--next" data-to_step="3" data-step="2">Siguiente</button>
+                </div>
+            </div>
+            <div class="step" id="step-3">
+                <div class="step__header">
+                    <h2 class="step__title">Informaion Personal<small>(Paso 3)</small></h2>
+                </div>
+                <div class="step__body">
+                    <select name="cliente.tipoContrato" class="step__input" aria-label="Default select example" required>
+                        <option selected>Tipo contrato</option>
+                        <option value="F">Fijo</option>
+                        <option value="I">Indefinido</option>
+                        <option value="O">Otro</option>
+                    </select>
+                    <input type="number" name="cliente.salarioMensual" placeholder="Salario Mensual" class="step__input" required>
+                    <select name="cliente.nivelEstudios" class="step__input" aria-label="Default select example" required>
+                        <option selected>Nivel de Estudios</option>
+                        <option value="N">Ninguno</option>
+                        <option value="P">Primaria</option>
+                        <option value="S">Secundaria</option>
+                        <option value="T">Técnico/Tecnólogo</option>
+                        <option value="U">Universitario</option>
+                        <!--<option value="O">postgrado</option>-->
+                    </select>
+                    <select name="cliente.actividadEconomica" class="step__input" aria-label="Default select example">
+                        <option selected>Actividad Economica</option>
+                        <option value="1">Jubilado</option>
+                        <option value="2">Empleado</option>
+                        <option value="3">Transportador</option>
+                        <option value="4">Independiente</option>
+                        <option value="8">Hogar</option>
+                    </select>
+                    <input type="number" name="cliente.totalActivos" placeholder="Total activos" class="step__input" required>
+                    <input type="number" name="cliente.totalPasivos" placeholder="Total pasivos" class="step__input"  required>
+                    <input type="number" name="valorSolicitado" placeholder="Valor Solicitado" class="step__input"  required>
+
+                </div>
+                <div class="step__footer">
+                    <button type="button" class="step__button step__button--back" data-to_step="2" data-step="3">Regresar</button>
+                    <button type="submit" class="step__button">solicitar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--=====
+	slite Creadores
+	=====-->
+<script src="js/app.js"></script>
+
+
+</body>
+</html>

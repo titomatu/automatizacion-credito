@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+	<!--=====
+	Se implementa los icono del index y se llaman los estilos
+	=====-->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Inicio</title>
+	<link rel="icon" href="Img/favicon.ico">
+	<link rel="stylesheet" href="css/estilos.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div id="particles-js"></div>
+	<!--=====
+	Barra de navegación
+	=====-->
+
+<header class="l-header">
+	    <nav class="nav bd-grid">
+	        <div>
+	            <a href="#" class="nav__logo">Solicitud de Credito</a>
+	        </div>
+			<div class="nav__menu" id="nav-menu">
+				<ul class="nav__list">
+					<li class="nav__item"><a href="/solicitud" class="nav__link active">Generar OTP</a></li>
+					<li class="nav__item"><a href="/login" class="nav__link active">Iniciar sesión</a></li>
+				</ul>
+			</div>
+	        <!--=====
+			barra responsive para telefonos
+			=====-->
+	        <div class="nav__toggle" id="nav-toggle">
+	            <i class='bx bx-menu'></i>
+	        </div>
+	    </nav>
+	</header>
+
+	<main class="l-main">
+		<!--===== solicita credito en 5 minutos =====-->
+            <section class="about section " id="about">
+                <h2 class="section-title">Solicita tu crédito en 5 minutos</h2>
+                <div class="about__container bd-grid">
+                    <div>
+                        <img src="Img/solicitud.jpg" alt="" class="skills__img">
+                    </div>
+                    <div>
+                        <h2 class="about__subtitle">Crédito virtual</h2>
+                        <p class="skills__text">En tan solo 5 minutos puedes crear tu solicitud de crédito y hacer tu sueño realidad
+                    	</p>
+                    </div>
+                </div>
+            </section>
+
+	</main>
+
+	<!--===== Pie =====-->
+	<footer class="footer">
+		<div class="footer__social">
+			<h1>Universidad Javeriana</h1>
+			<p1>Patrones de Software</p1>
+		</div>
+	</footer>
+
+	<!--=====
+	Particulas en movimiento
+	=====-->
+	<script src="js/particles.js"></script>
+	<script src="js/particulas.js"></script>
+
+	<!--=====
+	barra de navegacion responsive
+	=====-->
+	<script src="js/main.js"></script>
+	<script src="https://unpkg.com/scrollreveal"></script>
+	<!--=====
+	slite Creadores
+	=====-->
+	<script src="js/slider.js"></script>
+</body>
+</html>
