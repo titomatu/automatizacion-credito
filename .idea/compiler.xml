@@ -18,6 +18,16 @@
         <module name="aportes-linea-service" />
         <module name="motor-reglas-service" />
       </profile>
+      <profile name="Annotation profile for solicitud-credito" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.4.2.Final/mapstruct-processor-1.4.2.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.4.2.Final/mapstruct-1.4.2.Final.jar" />
+        </processorPath>
+        <module name="solicitud-credito" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="motor-reglas" target="11" />
@@ -32,6 +42,7 @@
       <module name="estudio-solicitud-service" options="-parameters" />
       <module name="motor-reglas-service" options="-parameters" />
       <module name="registraduria-service" options="-parameters" />
+      <module name="solicitud-credito" options="-parameters" />
       <module name="solicitud-service" options="-parameters" />
     </option>
   </component>
