@@ -23,6 +23,7 @@ public class ClienteDto {
     private Date fechaNacimiento;
     private Double totalActivos;
     private Double totalPasivos;
+    private Double gastos;
     private String autorizaCentrales;
 
     private String genero;

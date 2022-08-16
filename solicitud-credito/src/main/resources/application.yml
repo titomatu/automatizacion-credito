@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+server:
+  port: 8088
+feign:
+  client:
+    url:
+      cliente: http://localhost:8082/api
+      otp: http://localhost:8087/api/otp
+      solicitud: http://localhost:8087/api/solicitud
+      generatoke: http://localhost:8087/api/login
+credito:
+  retry:
+    attempts: 2
+    interval: 10000
+
