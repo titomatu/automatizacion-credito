@@ -45,6 +45,9 @@ public class Cliente implements Serializable {
     @Column(name = "fecha_nacimiento")
     private Date fechaNacimiento;
 
+    @Column(name = "gastos_mensuales")
+    private Double gastos;
+
     @Column(name = "total_activos")
     private Double totalActivos;
 

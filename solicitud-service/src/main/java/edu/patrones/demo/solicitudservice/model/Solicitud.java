@@ -26,6 +26,9 @@ public class Solicitud {
     @Column(name = "valor_solicitado")
     private Double valorSolicitado;
 
+    @Column(name = "plazo")
+    private Integer plazo;
+
     @Column(name = "valor_aprobado")
     private Long valorAprobado;
 

@@ -70,10 +70,12 @@ public class SolicitudService {
         cliente.getNivelEstudios().setId(solicitudDto.getClienteDto().getNivelEstudios());
         cliente.getTipoInmueble().setId(solicitudDto.getClienteDto().getTipoInmueble());
         cliente.getEstadoCivil().setId(solicitudDto.getClienteDto().getEstadoCivil());
+        cliente.setGastos(solicitudDto.getClienteDto().getGastos());
 
         solicitud.setNumeroSolicitud(UUID.randomUUID().toString());
         solicitud.setCliente(cliente);
         solicitud.setValorSolicitado(solicitudDto.getValorSolicitado());
+        solicitud.setPlazo(Integer.valueOf(solicitudDto.getPlazo()));
         solicitud.setSolicitudStatus(SolicitudStatus.SOLICITUD_CREADA);
         solicitud.setEstudioStatus(EstudioStatus.ESTUDIO_PENDIENTE);
         solicitud.setValorAprobado(Long.valueOf(0));
