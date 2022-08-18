@@ -92,6 +92,8 @@ public class SolicitudAprobadaTest {
         Select dropGenero = new Select(driver.findElement(By.name("cliente.genero")));
         dropGenero.selectByValue("M");
 
+        Thread.sleep(3000);
+
         WebElement btnPaso2 = driver.findElement(By.id("btn-sig1"));
         btnPaso2.click();
 
@@ -120,6 +122,8 @@ public class SolicitudAprobadaTest {
 
         WebElement autorizaCentrales = driver.findElement(By.name("cliente.autorizaCentrales"));
         autorizaCentrales.click();
+
+        Thread.sleep(3000);
 
         WebElement btnPaso3 = driver.findElement(By.id("btn-sig2"));
         btnPaso3.click();
@@ -158,6 +162,8 @@ public class SolicitudAprobadaTest {
         Select dropPlazoSolicitado = new Select(driver.findElement(By.name("plazosolicitado")));
         dropPlazoSolicitado.selectByValue("60");
 
+        Thread.sleep(3000);
+
         WebElement btnSolicitar = driver.findElement(By.id("btn-solicitar"));
         btnSolicitar.click();
 
@@ -181,6 +187,7 @@ public class SolicitudAprobadaTest {
                 solicitud.setRnecStatus(RNECStatus.valueOf(res.getString("estado_registraduria")));
                 solicitud.setEstudioStatus(EstudioStatus.valueOf(res.getString("estado_estudio")));
                 solicitud.setValorAprobado(res.getLong("valor_aprobado"));
+                solicitud.setPlazo(res.getInt("plazo"));
             }
         }
         catch(Exception e)
