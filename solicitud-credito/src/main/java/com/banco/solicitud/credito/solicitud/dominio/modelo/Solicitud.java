@@ -13,16 +13,22 @@ public class Solicitud {
   private String valorAprobado;
   private String mensaje;
 
+  private String valorGastos;
+
+  private String plazosolicitado;
+
   public Solicitud() {
   }
 
   public Solicitud(Cliente cliente, Integer numeroSolictud, String valorSolicitado,
-      String valorAprobado, String mensaje) {
+      String valorAprobado, String mensaje, String valorGastos, String plazosolicitado) {
     this.cliente = cliente;
     this.numeroSolictud = numeroSolictud;
     this.valorSolicitado = valorSolicitado;
     this.valorAprobado = valorAprobado;
     this.mensaje = mensaje;
+    this.valorGastos = valorGastos;
+    this.plazosolicitado = plazosolicitado;
   }
 
   public Cliente getCliente() {
@@ -64,6 +70,14 @@ public class Solicitud {
   public void setMensaje(String mensaje) {
     this.mensaje = mensaje;
   }
+  public String getValorGastos() { return valorGastos; }
+
+  public void setValorGastos(String valorGastos) { this.valorGastos = valorGastos; }
+
+  public void setPlazosolicitado(String plazosolicitado) {
+    this.plazosolicitado = plazosolicitado;
+  }
+  public String getPlazosolicitado() { return plazosolicitado; }
 
   @Override
   public String toString() {
@@ -73,6 +87,8 @@ public class Solicitud {
     sb.append(", valorSolicitado='").append(valorSolicitado).append('\'');
     sb.append(", valorAprobado='").append(valorAprobado).append('\'');
     sb.append(", mensaje='").append(mensaje).append('\'');
+    sb.append(", valorGastos'=").append(valorGastos).append('\'');
+    sb.append(", plazosolicitado'=").append(plazosolicitado).append('\'');
     sb.append('}');
     return sb.toString();
   }
