@@ -88,6 +88,12 @@
             <artifactId>camel-jackson-starter</artifactId>
             <version>3.0.0-RC3</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.30</version>
+        </dependency>
 
         <dependency>
             <groupId>edu.patrones.demo</groupId>
