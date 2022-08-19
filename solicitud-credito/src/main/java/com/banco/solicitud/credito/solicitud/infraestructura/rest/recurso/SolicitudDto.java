@@ -13,7 +13,7 @@ public class SolicitudDto {
   private String mensaje;
   private Double valorGastos;
 
-  private Integer plazosolicitado;
+  private Integer plazo;
   public SolicitudDto() {
   }
 
@@ -26,7 +26,7 @@ public class SolicitudDto {
     this.valorAprobado = valorAprobado;
     this.mensaje = mensaje;
     this.valorGastos = valorGastos;
-    this.plazosolicitado = plazosolicitado;
+    this.plazo = plazo;
   }
 
   public ClienteDTO getClienteDto() {
@@ -65,8 +65,12 @@ public class SolicitudDto {
   public void setMensaje(String mensaje) { this.mensaje = mensaje; }
   public Double getValorGastos()  { return valorGastos; }
   public void setValorGastos(Double valorGastos) { this.valorGastos = valorGastos;}
-  public Integer getPlazosolicitado() { return plazosolicitado; }
-  public void setPlazosolicitado(Integer plazosolicitado) {
-    this.plazosolicitado = plazosolicitado;
+
+  public Integer getPlazo() {
+    return plazo;
+  }
+
+  public void setPlazo(Integer plazo) {
+    this.plazo = plazo;
   }
 }

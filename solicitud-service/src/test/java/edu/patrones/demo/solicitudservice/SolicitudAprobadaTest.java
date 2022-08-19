@@ -176,7 +176,7 @@ public class SolicitudAprobadaTest {
         totalPasivos.clear();
         totalPasivos.sendKeys("20000000");
 
-        WebElement valorGastos = driver.findElement(By.name("valorGastos"));
+        WebElement valorGastos = driver.findElement(By.name("cliente.gastos"));
         valorGastos.clear();
         valorGastos.sendKeys("20000000");
 
@@ -184,7 +184,7 @@ public class SolicitudAprobadaTest {
         valorSolicitado.clear();
         valorSolicitado.sendKeys("50000000");
 
-        Select dropPlazoSolicitado = new Select(driver.findElement(By.name("plazosolicitado")));
+        Select dropPlazoSolicitado = new Select(driver.findElement(By.name("plazo")));
         dropPlazoSolicitado.selectByValue("60");
 
         Thread.sleep(3000);
