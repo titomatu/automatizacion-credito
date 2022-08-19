@@ -14,9 +14,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.sql.*;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -41,7 +44,7 @@ public class SolicitudAprobadaTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("http://127.0.0.1:8088/radicar");
+        driver.get("http://127.0.0.1:8088");
 
         try{
             // Database connection
@@ -61,6 +64,28 @@ public class SolicitudAprobadaTest {
 
     @Test
     public void testSolicitudAprobada() throws InterruptedException {
+        //Login
+        Thread.sleep(3000);
+
+        WebElement linkLogin = driver.findElement(By.linkText("Iniciar sesión"));
+        linkLogin.click();
+
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        WebElement username = driver.findElement(By.name("username"));
+        username.clear();
+        username.sendKeys("123456789");
+
+        WebElement password = driver.findElement(By.name("password"));
+        password.clear();
+        password.sendKeys("OdYlLzXa");
+
+        Thread.sleep(3000);
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement element=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='w-100 btn btn-lg btn-primary' and contains(.,'Ingresar')]")));
+        element.click();
+
         //Paso 1
         Select dropTipoDocumento = new Select(driver.findElement(By.name("cliente.tipoDocumento")));
         dropTipoDocumento.selectByValue("CC");
@@ -164,8 +189,14 @@ public class SolicitudAprobadaTest {
 
         Thread.sleep(3000);
 
-        WebElement btnSolicitar = driver.findElement(By.id("btn-solicitar"));
+        WebElement btnSolicitar = wait.until(ExpectedConditions.elementToBeClickable(By.id("btn-solicitar")));
         btnSolicitar.click();
+
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        String titleElem = driver.findElement(By.xpath("//*[@class='container p-5 my-5 bg-dark text-white']/h1")).getText();
+
+        assertEquals("Hemos Generado una Solicitud de Crédito", titleElem, "Se verifica mensaje de radicación exitoso");
 
         Solicitud solicitud = new Solicitud();
 
