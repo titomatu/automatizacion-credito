@@ -80,6 +80,12 @@
                         <option value="H">Propia con Hipoteca</option>
                         <option value="A">Arrendada</option>
                     </select>
+                    <select name="cliente.tipoContrato" class="step__input" aria-label="Default select example" required>
+                        <option selected>Tipo contrato</option>
+                        <option value="F">Fijo</option>
+                        <option value="I">Indefinido</option>
+                        <option value="O">Otro</option>
+                    </select>
                     <div class="text-center">
                         <label>
                             <input type="checkbox" name="cliente.autorizaCentrales" value="remember-me" required> Autoriza centrales
@@ -96,12 +102,6 @@
                     <h2 class="step__title">Informaion Personal<small>(Paso 3)</small></h2>
                 </div>
                 <div class="step__body">
-                    <select name="cliente.tipoContrato" class="step__input" aria-label="Default select example" required>
-                        <option selected>Tipo contrato</option>
-                        <option value="F">Fijo</option>
-                        <option value="I">Indefinido</option>
-                        <option value="O">Otro</option>
-                    </select>
                     <input type="number" name="cliente.salarioMensual" placeholder="Salario Mensual" class="step__input" required>
                     <select name="cliente.nivelEstudios" class="step__input" aria-label="Default select example" required>
                         <option selected>Nivel de Estudios</option>
