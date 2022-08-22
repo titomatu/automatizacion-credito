@@ -10,6 +10,7 @@ import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.WebElementQuestion;
 import net.serenitybdd.screenplay.waits.Wait;
 import net.serenitybdd.screenplay.actions.SelectFromOptions;
+import net.thucydides.core.annotations.Step;
 
 public class LlenarPasoUnoTask implements Task {
 
@@ -34,6 +35,7 @@ public class LlenarPasoUnoTask implements Task {
     }
 
     @Override
+    @Step("El Cliente llena los campos del paso 1 de la solicitud")
     public <T extends Actor> void performAs(T t) {
         t.attemptsTo(
                 Wait.until(

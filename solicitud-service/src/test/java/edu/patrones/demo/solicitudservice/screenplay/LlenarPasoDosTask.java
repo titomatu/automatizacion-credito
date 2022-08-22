@@ -8,6 +8,7 @@ import net.serenitybdd.screenplay.actions.*;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.WebElementQuestion;
 import net.serenitybdd.screenplay.waits.Wait;
+import net.thucydides.core.annotations.Step;
 
 public class LlenarPasoDosTask implements Task {
 
@@ -30,10 +31,11 @@ public class LlenarPasoDosTask implements Task {
     }
 
     @Override
+    @Step("El Cliente llena los campos del paso 2 de la solicitud")
     public <T extends Actor> void performAs(T t) {
         t.attemptsTo(
                 Wait.until(
-                        WebElementQuestion.the(LlenarSolicitudPage.FECHA_NACIMIENTO) , WebElementStateMatchers.isPresent()
+                        WebElementQuestion.the(LlenarSolicitudPage.FECHA_NACIMIENTO) , WebElementStateMatchers.isVisible()
                 ).forNoMoreThan(30).seconds(),
                 Enter.theValue(fecha_nacimiento).into(LlenarSolicitudPage.FECHA_NACIMIENTO),
                 Enter.theValue(numero_celular).into(LlenarSolicitudPage.CELULAR),
@@ -42,7 +44,8 @@ public class LlenarPasoDosTask implements Task {
                 SelectFromOptions.byValue(tipo_inmueble).from(LlenarSolicitudPage.TIPO_INMUEBLE),
                 SelectFromOptions.byValue(tipo_residencia).from(LlenarSolicitudPage.TIPO_RESIDENCIA),
                 SelectFromOptions.byValue(tipo_contrato).from(LlenarSolicitudPage.TIPO_CONTRATO),
-                Click.on(LlenarSolicitudPage.CHECK_AUTORIZA_CENTRALES)
+                Click.on(LlenarSolicitudPage.CHECK_AUTORIZA_CENTRALES),
+                Click.on(LlenarSolicitudPage.BTN_PASO2)
         );
     }
 

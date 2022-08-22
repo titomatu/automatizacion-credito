@@ -25,14 +25,14 @@ public class LlenarSolicitudPage extends PageObject {
     public static final By CHECK_AUTORIZA_CENTRALES = By.name("cliente.autorizaCentrales");
     public static final By BTN_PASO2 = By.id("btn-sig2");
 
-    public static final By salarioMensual = By.name("cliente.salarioMensual");
-    public static final By nivelEstudios = By.name("cliente.nivelEstudios");
-    public static final By actividadEconomica = By.name("cliente.actividadEconomica");
-    public static final By totalActivos = By.name("cliente.totalActivos");
-    public static final By totalPasivos = By.name("cliente.totalPasivos");
-    public static final By gastos = By.name("cliente.gastos");
-    public static final By valorSolicitado = By.name("valorSolicitado");
-    public static final By plazo = By.name("plazo");
-    public static final By btnSolicitar = By.id("btn-solicitar");
-    public static By successAlert = By.xpath("//*[@class='container p-5 my-5 bg-dark text-white']/h1");
+    public static final By SALARIO_MENSUAL = By.name("cliente.salarioMensual");
+    public static final By NIVEL_ESTUDIOS = By.name("cliente.nivelEstudios");
+    public static final By ACTIVIDAD_ECONOMICA = By.name("cliente.actividadEconomica");
+    public static final By TOTAL_ACTIVOS = By.name("cliente.totalActivos");
+    public static final By TOTAL_PASIVOS = By.name("cliente.totalPasivos");
+    public static final By GASTOS = By.name("cliente.gastos");
+    public static final By VALOR_SOLICITADO = By.name("valorSolicitado");
+    public static final By PLAZO = By.name("plazo");
+    public static final By BTN_SOLICITAR = By.id("btn-solicitar");
+    public static By SUCCESS_ALERT = By.xpath("//*[@class='container p-5 my-5 bg-dark text-white']/h1");
 }

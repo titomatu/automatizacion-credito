@@ -3,6 +3,7 @@ package edu.patrones.demo.solicitudservice;
 import edu.patrones.demo.solicitudservice.model.Solicitud;
 import edu.patrones.demo.solicitudservice.pages.LoginPage;
 import edu.patrones.demo.solicitudservice.pages.SolicitudPage;
+import edu.patrones.demo.solicitudservice.screenplay.LLenarPasoTresTask;
 import edu.patrones.demo.solicitudservice.screenplay.LlenarPasoDosTask;
 import edu.patrones.demo.solicitudservice.screenplay.LlenarPasoUnoTask;
 import edu.patrones.demo.solicitudservice.screenplay.LoginTask;
@@ -18,8 +19,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebDriver;
 
-import static net.serenitybdd.screenplay.GivenWhenThen.givenThat;
-import static net.serenitybdd.screenplay.GivenWhenThen.when;
+import static net.serenitybdd.screenplay.GivenWhenThen.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -34,6 +34,7 @@ public class SolicitudRechazadaRNECScreenplayTest{
 
     @BeforeEach
     public void setup(){
+        browser.manage().window().maximize();
         cliente.can(BrowseTheWeb.with(browser));
     }
 
@@ -63,7 +64,22 @@ public class SolicitudRechazadaRNECScreenplayTest{
                                 "A",
                                 "P",
                                 "I"
+                        ),
+                        LLenarPasoTresTask.of(
+                                "5000000",
+                                "U",
+                                "2",
+                                "20000000",
+                                "20000000",
+                                "20000000",
+                                "50000000",
+                                "60"
                         )
+                );
+
+        then(cliente)
+                .should(
+
                 );
     }
 
