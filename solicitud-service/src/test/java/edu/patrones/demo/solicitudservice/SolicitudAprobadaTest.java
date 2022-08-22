@@ -3,11 +3,14 @@ package edu.patrones.demo.solicitudservice;
 import edu.patrones.demo.solicitudservice.model.Solicitud;
 import edu.patrones.demo.solicitudservice.pages.LoginPage;
 import edu.patrones.demo.solicitudservice.pages.SolicitudPage;
+import net.serenitybdd.junit5.SerenityJUnit5Extension;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(SerenityJUnit5Extension.class)
 public class SolicitudAprobadaTest extends SolicitudBaseTest{
 
     @ParameterizedTest
