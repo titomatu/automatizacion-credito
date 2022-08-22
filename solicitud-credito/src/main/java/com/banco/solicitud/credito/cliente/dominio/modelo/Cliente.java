@@ -28,6 +28,8 @@ public class Cliente {
   private String tipoInmueble;
   private String estadoCivil;
 
+  private Double gastos;
+
   public Cliente() {
   }
 
@@ -36,7 +38,7 @@ public class Cliente {
       String correoElectronico, Double salarioMensual, Date fechaNacimiento,
       Double totalActivos, Double totalPasivos, String autorizaCentrales, String genero,
       String tipoResidencia, Integer actividadEconomica, String tipoContrato,
-      String nivelEstudios, String tipoInmueble, String estadoCivil) {
+      String nivelEstudios, String tipoInmueble, String estadoCivil, Double gastos) {
     this.tipoDocumento = tipoDocumento;
     this.numeroDocumento = numeroDocumento;
     this.fechaExpedicion = fechaExpedicion;
@@ -58,6 +60,7 @@ public class Cliente {
     this.nivelEstudios = nivelEstudios;
     this.tipoInmueble = tipoInmueble;
     this.estadoCivil = estadoCivil;
+    this.gastos = gastos;
   }
 
   public String getTipoDocumento() {
@@ -228,6 +231,14 @@ public class Cliente {
     this.estadoCivil = estadoCivil;
   }
 
+  public Double getGastos() {
+    return gastos;
+  }
+
+  public void setGastos(Double gastos) {
+    this.gastos = gastos;
+  }
+
   @Override
   public String toString() {
     final StringBuffer sb = new StringBuffer("Cliente{");
@@ -252,6 +263,7 @@ public class Cliente {
     sb.append(", nivelEstudios='").append(nivelEstudios).append('\'');
     sb.append(", tipoInmueble='").append(tipoInmueble).append('\'');
     sb.append(", estadoCivil='").append(estadoCivil).append('\'');
+    sb.append(", gastos='").append(gastos).append('\'');
     sb.append('}');
     return sb.toString();
   }
