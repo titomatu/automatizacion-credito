@@ -7,6 +7,7 @@ import edu.patrones.demo.event.rnec.RNECStatus;
 import edu.patrones.demo.event.solicitud.SolicitudStatus;
 import edu.patrones.demo.solicitudservice.model.Solicitud;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import net.thucydides.core.annotations.Managed;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +18,7 @@ import java.sql.*;
 
 public abstract class SolicitudBaseTest {
 
+    @Managed
     protected WebDriver driver;
 
     private String url = "http://127.0.0.1:8088";
