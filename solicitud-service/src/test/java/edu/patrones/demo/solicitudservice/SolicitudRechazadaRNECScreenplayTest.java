@@ -3,6 +3,7 @@ package edu.patrones.demo.solicitudservice;
 import edu.patrones.demo.solicitudservice.model.Solicitud;
 import edu.patrones.demo.solicitudservice.pages.LoginPage;
 import edu.patrones.demo.solicitudservice.pages.SolicitudPage;
+import edu.patrones.demo.solicitudservice.screenplay.LlenarPasoDosTask;
 import edu.patrones.demo.solicitudservice.screenplay.LlenarPasoUnoTask;
 import edu.patrones.demo.solicitudservice.screenplay.LoginTask;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
@@ -53,6 +54,15 @@ public class SolicitudRechazadaRNECScreenplayTest{
                                 "APELLIDO PRUEBA 11",
                                 "APELLIDO PRUEBA 22",
                                 "M"
+                        ),
+                        LlenarPasoDosTask.of(
+                                "1980/12/27",
+                                "31012345656375",
+                                "titomaturanad@javeriana.edu.co",
+                                "C",
+                                "A",
+                                "P",
+                                "I"
                         )
                 );
     }

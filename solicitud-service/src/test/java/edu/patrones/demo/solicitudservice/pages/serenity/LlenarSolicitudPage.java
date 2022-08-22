@@ -15,15 +15,16 @@ public class LlenarSolicitudPage extends PageObject {
     public static final By GENERO = By.name("cliente.genero");
     public static final By BTN_PASO1 = By.id("btn-sig1");
 
-    public static final By fechaNacimiento = By.name("cliente.fechaNacimiento");
-    public static final By celular = By.name("cliente.celular");
-    public static final By correoElectronico = By.name("cliente.correoElectronico");
-    public static final By estadoCivil = By.name("cliente.estadoCivil");
-    public static final By tipoInmueble = By.name("cliente.tipoInmueble");
-    public static final By tipoResidencia = By.name("cliente.tipoResidencia");
-    public static final By tipoContrato = By.name("cliente.tipoContrato");
-    public static final By autorizaCentrales = By.name("cliente.autorizaCentrales");
-    public static final By btn_paso2 = By.id("btn-sig2");
+    public static final By FECHA_NACIMIENTO = By.name("cliente.fechaNacimiento");
+    public static final By CELULAR = By.name("cliente.celular");
+    public static final By CORREO_ELECTRONICO = By.name("cliente.correoElectronico");
+    public static final By ESTADO_CIVIL = By.name("cliente.estadoCivil");
+    public static final By TIPO_INMUEBLE = By.name("cliente.tipoInmueble");
+    public static final By TIPO_RESIDENCIA = By.name("cliente.tipoResidencia");
+    public static final By TIPO_CONTRATO = By.name("cliente.tipoContrato");
+    public static final By CHECK_AUTORIZA_CENTRALES = By.name("cliente.autorizaCentrales");
+    public static final By BTN_PASO2 = By.id("btn-sig2");
+
     public static final By salarioMensual = By.name("cliente.salarioMensual");
     public static final By nivelEstudios = By.name("cliente.nivelEstudios");
     public static final By actividadEconomica = By.name("cliente.actividadEconomica");
