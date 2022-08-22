@@ -49,7 +49,10 @@ public class LLenarPasoTresTask implements Task {
                 Enter.theValue(gastosVr).into(LlenarSolicitudPage.GASTOS),
                 Enter.theValue(valor_solicitado).into(LlenarSolicitudPage.VALOR_SOLICITADO),
                 SelectFromOptions.byValue(tiempo_plazo).from(LlenarSolicitudPage.PLAZO),
-                Click.on(LlenarSolicitudPage.BTN_SOLICITAR)
+                Click.on(LlenarSolicitudPage.BTN_SOLICITAR),
+                Wait.until(
+                        WebElementQuestion.the(LlenarSolicitudPage.SUCCESS_ALERT) , WebElementStateMatchers.isPresent()
+                ).forNoMoreThan(30).seconds()
         );
     }
 

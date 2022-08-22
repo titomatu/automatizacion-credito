@@ -1,27 +1,26 @@
 package edu.patrones.demo.solicitudservice;
 
 import edu.patrones.demo.solicitudservice.model.Solicitud;
-import edu.patrones.demo.solicitudservice.pages.LoginPage;
-import edu.patrones.demo.solicitudservice.pages.SolicitudPage;
 import edu.patrones.demo.solicitudservice.screenplay.LLenarPasoTresTask;
 import edu.patrones.demo.solicitudservice.screenplay.LlenarPasoDosTask;
 import edu.patrones.demo.solicitudservice.screenplay.LlenarPasoUnoTask;
 import edu.patrones.demo.solicitudservice.screenplay.LoginTask;
+import edu.patrones.demo.solicitudservice.utils.Utils;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.annotations.CastMember;
 import net.thucydides.core.annotations.Managed;
-import org.junit.Before;
+import net.thucydides.core.annotations.Title;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebDriver;
 
-import static net.serenitybdd.screenplay.GivenWhenThen.*;
+import static net.serenitybdd.screenplay.GivenWhenThen.givenThat;
+import static net.serenitybdd.screenplay.GivenWhenThen.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SerenityJUnit5Extension.class)
 public class SolicitudRechazadaRNECScreenplayTest{
@@ -40,7 +39,9 @@ public class SolicitudRechazadaRNECScreenplayTest{
 
     @ParameterizedTest
     @CsvSource({ "123456799,GFuYouc4"})
-    public void testScreenPlay(String username, String password) {
+    @Title("Solicitud rechazada por información RNEC inválida")
+    public void testSolicitudRechazadaRNEC(String username, String password) throws InterruptedException {
+
         givenThat(cliente)
                 .attemptsTo(LoginTask.of(username, password));
 
@@ -77,10 +78,19 @@ public class SolicitudRechazadaRNECScreenplayTest{
                         )
                 );
 
-        then(cliente)
-                .should(
+        Thread.sleep(15000);
 
-                );
+        //Then
+
+        Solicitud solicitud = Utils.obtenerSolicitud(username);
+
+        assertEquals("SOLICITUD_RECHAZADA", solicitud.getSolicitudStatus().name(), "Se verifica que la solicitud haya sido aprobada");
+        assertEquals("RNEC_NO_EXITOSO", solicitud.getRnecStatus().name(), "Se verifica que la RNEC haya sido aprobada");
+        assertEquals("APORTES_LINEA_VALIDADO", solicitud.getAportesLineaStatus().name(), "Se verifica que la Aportes haya sido aprobada");
+        assertEquals("CENTRALES_COMPLETADO", solicitud.getCentralesStatus().name(), "Se verifica que la Centrales haya sido aprobada");
+        assertEquals("ESTUDIO_PENDIENTE", solicitud.getEstudioStatus().name(), "Se verifica que la Estudio haya sido aprobada");
+        assertEquals(60, solicitud.getPlazo(), "Se verifica el plazo aprobado");
+        assertEquals(0, solicitud.getValorAprobado(), "Se verifica que la solicitud haya sido aprobada con un valor");
     }
 
 }
