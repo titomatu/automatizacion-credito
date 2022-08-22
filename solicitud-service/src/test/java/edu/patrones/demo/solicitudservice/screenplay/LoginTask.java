@@ -7,6 +7,8 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.EnterValue;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.WebElementQuestion;
@@ -33,7 +35,10 @@ public class LoginTask implements Task {
                 Click.on(InitPage.LINK_LOGIN),
                 Wait.until(
                         WebElementQuestion.the(InitPage.USERNAME) , WebElementStateMatchers.isEnabled()
-                ).forNoMoreThan(30).seconds()
+                ).forNoMoreThan(30).seconds(),
+                Enter.theValue(username).into(InitPage.USERNAME),
+                Enter.theValue(password).into(InitPage.PASSWORD),
+                Click.on(InitPage.BTN_LOGIN)
         );
     }
 

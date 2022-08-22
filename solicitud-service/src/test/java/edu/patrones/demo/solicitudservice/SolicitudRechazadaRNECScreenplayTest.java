@@ -3,6 +3,7 @@ package edu.patrones.demo.solicitudservice;
 import edu.patrones.demo.solicitudservice.model.Solicitud;
 import edu.patrones.demo.solicitudservice.pages.LoginPage;
 import edu.patrones.demo.solicitudservice.pages.SolicitudPage;
+import edu.patrones.demo.solicitudservice.screenplay.LlenarPasoUnoTask;
 import edu.patrones.demo.solicitudservice.screenplay.LoginTask;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import net.serenitybdd.screenplay.Actor;
@@ -40,6 +41,20 @@ public class SolicitudRechazadaRNECScreenplayTest{
     public void testScreenPlay(String username, String password) {
         givenThat(cliente)
                 .attemptsTo(LoginTask.of(username, password));
+
+        when(cliente)
+                .attemptsTo(
+                        LlenarPasoUnoTask.of(
+                                "CC",
+                                username,
+                                "2017/12/27",
+                                "NOMBRE PRUEBA 11",
+                                "NOMBRE PRUEBA 22",
+                                "APELLIDO PRUEBA 11",
+                                "APELLIDO PRUEBA 22",
+                                "M"
+                        )
+                );
     }
 
 }
