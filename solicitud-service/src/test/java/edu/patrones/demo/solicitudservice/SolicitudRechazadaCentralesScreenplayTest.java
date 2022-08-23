@@ -32,7 +32,7 @@ import static org.hamcrest.Matchers.equalTo;
 @ExtendWith(SerenityJUnit5Extension.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
-public class SolicitudRechazadaRNECScreenplayTest{
+public class SolicitudRechazadaCentralesScreenplayTest {
 
     @Autowired
     SolicitudRepository solicitudRepository;
@@ -56,8 +56,8 @@ public class SolicitudRechazadaRNECScreenplayTest{
     }
 
     @ParameterizedTest
-    @CsvSource({ "123456799,GFuYouc4"})
-    @Title("Solicitud rechazada por información RNEC inválida")
+    @CsvSource({ "12345678912,MWuBgSjr"})
+    @Title("Solicitud rechazada por información Centrales no satisfactorias")
     public void testSolicitudRechazadaRNEC(String username, String password) throws InterruptedException {
 
         givenThat(cliente)
@@ -111,10 +111,10 @@ public class SolicitudRechazadaRNECScreenplayTest{
         then(analista)
                 .should(
                         seeThat("El estado de la Solicitud es Rechazada", solicitudOverviewData.estadoSolicitud(), equalTo(SolicitudStatus.SOLICITUD_RECHAZADA)),
-                        seeThat("El estado de RNEC es No Exitoso", solicitudOverviewData.estadoValidacionRNEC(), equalTo(RNECStatus.RNEC_NO_EXITOSO)),
+                        seeThat("El estado de RNEC es Completado", solicitudOverviewData.estadoValidacionRNEC(), equalTo(RNECStatus.RNEC_COMPLETADO)),
                         seeThat("El estado de Aportes es Validado", solicitudOverviewData.estadoAportesLinea(), equalTo(AportesLineaStatus.APORTES_LINEA_VALIDADO)),
                         seeThat("El estado de Centrales es Completado", solicitudOverviewData.estadoVerificacionCentrales(), equalTo(CentralesStatus.CENTRALES_COMPLETADO)),
-                        seeThat("El estado del Estudio es Pendiente", solicitudOverviewData.estadoEstudioSolicitud(), equalTo(EstudioStatus.ESTUDIO_PENDIENTE)),
+                        seeThat("El estado del Estudio es No Aprobado", solicitudOverviewData.estadoEstudioSolicitud(), equalTo(EstudioStatus.ESTUDIO_NO_APROBADO)),
                         seeThat("El valor aprobado es 0", solicitudOverviewData.valorAprobado(), equalTo(0L))
                 );
     }
