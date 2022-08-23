@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.Instant;
 
 @Data
@@ -71,5 +70,5 @@ public class Solicitud {
 
     @Column(name = "creation_date", nullable = false, updatable = false)
     @CreationTimestamp
-    private Instant creation_date;
+    private Instant creationDate;
 }

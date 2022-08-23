@@ -1,11 +1,14 @@
 package edu.patrones.demo.solicitudservice;
 
+import edu.patrones.demo.event.aportes.AportesLineaStatus;
+import edu.patrones.demo.event.centrales.CentralesStatus;
+import edu.patrones.demo.event.estudio.EstudioStatus;
+import edu.patrones.demo.event.rnec.RNECStatus;
+import edu.patrones.demo.event.solicitud.SolicitudStatus;
+import edu.patrones.demo.solicitudservice.model.ClienteId;
 import edu.patrones.demo.solicitudservice.model.Solicitud;
-import edu.patrones.demo.solicitudservice.screenplay.LLenarPasoTresTask;
-import edu.patrones.demo.solicitudservice.screenplay.LlenarPasoDosTask;
-import edu.patrones.demo.solicitudservice.screenplay.LlenarPasoUnoTask;
-import edu.patrones.demo.solicitudservice.screenplay.LoginTask;
-import edu.patrones.demo.solicitudservice.utils.Utils;
+import edu.patrones.demo.solicitudservice.repository.SolicitudRepository;
+import edu.patrones.demo.solicitudservice.screenplay.*;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
@@ -17,19 +20,31 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebDriver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import static net.serenitybdd.screenplay.GivenWhenThen.givenThat;
-import static net.serenitybdd.screenplay.GivenWhenThen.when;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.List;
+
+import static net.serenitybdd.screenplay.GivenWhenThen.*;
+import static org.hamcrest.Matchers.equalTo;
 
 @ExtendWith(SerenityJUnit5Extension.class)
+@DataJpaTest
+@AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
 public class SolicitudRechazadaRNECScreenplayTest{
+
+    @Autowired
+    SolicitudRepository solicitudRepository;
 
     @Managed(driver = "chrome")
     private WebDriver browser;
 
     @CastMember(name = "Cliente")
     Actor cliente;
+
+    @CastMember(name = "AnalistaDeCredito")
+    Actor analista;
 
     @BeforeEach
     public void setup(){
@@ -78,19 +93,27 @@ public class SolicitudRechazadaRNECScreenplayTest{
                         )
                 );
 
+        then(cliente)
+                .should(
+                    seeThat("El mensaje de confirmación de la radiación de la solicitud se ha desplegado", SolicitudRadicadaQuestion.value())
+                );
+
         Thread.sleep(15000);
 
-        //Then
+        List<Solicitud> solicitudList = solicitudRepository.findFirstByCliente_ClienteIdOrderByCreationDateDesc(new ClienteId("CC", Long.valueOf(username)));
 
-        Solicitud solicitud = Utils.obtenerSolicitud(username);
+        Solicitud solicitud = solicitudList.get(0);
+        SolicitudOverviewData solicitudOverviewData = new SolicitudOverviewData(solicitud);
 
-        assertEquals("SOLICITUD_RECHAZADA", solicitud.getSolicitudStatus().name(), "Se verifica que la solicitud haya sido aprobada");
-        assertEquals("RNEC_NO_EXITOSO", solicitud.getRnecStatus().name(), "Se verifica que la RNEC haya sido aprobada");
-        assertEquals("APORTES_LINEA_VALIDADO", solicitud.getAportesLineaStatus().name(), "Se verifica que la Aportes haya sido aprobada");
-        assertEquals("CENTRALES_COMPLETADO", solicitud.getCentralesStatus().name(), "Se verifica que la Centrales haya sido aprobada");
-        assertEquals("ESTUDIO_PENDIENTE", solicitud.getEstudioStatus().name(), "Se verifica que la Estudio haya sido aprobada");
-        assertEquals(60, solicitud.getPlazo(), "Se verifica el plazo aprobado");
-        assertEquals(0, solicitud.getValorAprobado(), "Se verifica que la solicitud haya sido aprobada con un valor");
+        then(analista)
+                .should(
+                        seeThat("El estado de la Solicitud es Rechazada", solicitudOverviewData.estadoSolicitud(), equalTo(SolicitudStatus.SOLICITUD_RECHAZADA)),
+                        seeThat("El estado de RNEC es No Exitoso", solicitudOverviewData.estadoValidacionRNEC(), equalTo(RNECStatus.RNEC_NO_EXITOSO)),
+                        seeThat("El estado de RNEC es No Exitoso", solicitudOverviewData.estadoAportesLinea(), equalTo(AportesLineaStatus.APORTES_LINEA_VALIDADO)),
+                        seeThat("El estado de Centrales es Completado", solicitudOverviewData.estadoVerificacionCentrales(), equalTo(CentralesStatus.CENTRALES_COMPLETADO)),
+                        seeThat("El estado del Estudio es Pendiente", solicitudOverviewData.estadoEstudioSolicitud(), equalTo(EstudioStatus.ESTUDIO_PENDIENTE)),
+                        seeThat("El valor aprobado es 0", solicitudOverviewData.valorAprobado(), equalTo(0L))
+                );
     }
 
 }
