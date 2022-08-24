@@ -81,7 +81,7 @@ rule "aprobadoCentral autoriza"
 no-loop  /*PERMITE QUE SE EJECUTE HASTA CUANDO CUMPLA LA CONDICION*/
 
     when
-        orderObject : MotorReglaRequestDto( orderObject.getAprobadoCentral()=="X");
+        orderObject : MotorReglaRequestDto( orderObject.getAprobadoCentral()=="X" || orderObject.getAprobadoCentral()=="S");
     then
     	 orderObject.setMensajeE("PERFIL DE RIESGO NO VALIDO");
 	     modify(orderObject){

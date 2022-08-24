@@ -16,8 +16,7 @@ public interface SolicitudEnsamblador {
       @Mapping( target = "valorSolicitado", source = "solicitudDto.valorSolicitado" ),
       @Mapping( target = "valorAprobado" , source = "solicitudDto.valorAprobado"),
       @Mapping( target = "mensaje", source = "solicitudDto.mensaje"),
-      @Mapping( target = "valorGastos", source = "solicitudDto.valorGastos"),
-      @Mapping( target = "plazosolicitado", source = "solicitudDto.plazosolicitado")
+      @Mapping( target = "plazo", source = "solicitudDto.plazo")
   })
   public Solicitud convierteDTOaModelo(SolicitudDto solicitudDto);
 
