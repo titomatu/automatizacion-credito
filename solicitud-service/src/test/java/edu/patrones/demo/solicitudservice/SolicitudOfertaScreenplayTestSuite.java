@@ -5,7 +5,7 @@ import org.junit.platform.suite.api.Suite;
 import org.junit.platform.suite.api.SuiteDisplayName;
 
 @Suite
-@SelectClasses({SolicitudAprobadaTest.class, SolicitudRechazadaRNECTest.class, SolicitudRechazadaCentralesTest.class, SolicitudRechazadaRNECScreenplayTest.class})
+@SelectClasses({SolicitudAprobadaCScreenplayTest.class, SolicitudRechazadaRNECScreenplayTest.class, SolicitudRechazadaCentralesScreenplayTest.class})
 @SuiteDisplayName("Solicitud Oferta Suit Test")
-public class SolicitudOfertaTestSuite {
+public class SolicitudOfertaScreenplayTestSuite {
 }

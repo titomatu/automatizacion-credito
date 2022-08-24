@@ -183,6 +183,12 @@
             <version>${serenity.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-cucumber</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>edu.patrones.demo</groupId>
@@ -271,7 +277,7 @@
                     <includes>
                         <!-- include>**/*Test.java</include -->
                         <!-- include>**/Test*.java</include -->
-                        <include>**/*TestSuite.java</include>
+                        <include>**/*ScreenplayTestSuite.java</include>
                         <!-- include>**/When*.java</include -->
                     </includes>
                     <systemPropertyVariables>
