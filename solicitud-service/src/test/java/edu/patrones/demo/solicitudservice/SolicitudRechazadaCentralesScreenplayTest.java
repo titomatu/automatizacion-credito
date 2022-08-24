@@ -98,7 +98,7 @@ public class SolicitudRechazadaCentralesScreenplayTest {
 
         then(cliente)
                 .should(
-                    seeThat("El mensaje de confirmación de la radiación de la solicitud se ha desplegado", SolicitudRadicadaQuestion.value())
+                    seeThat("El mensaje de confirmación de la radicación de la solicitud se ha desplegado", SolicitudRadicadaQuestion.value())
                 );
 
         Thread.sleep(15000);

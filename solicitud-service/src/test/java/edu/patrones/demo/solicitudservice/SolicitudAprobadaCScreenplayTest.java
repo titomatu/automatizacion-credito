@@ -28,11 +28,12 @@ import java.util.List;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.*;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
 
 @ExtendWith(SerenityJUnit5Extension.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
-public class SolicitudRechazadaRNECScreenplayTest{
+public class SolicitudAprobadaCScreenplayTest {
 
     @Autowired
     SolicitudRepository solicitudRepository;
@@ -56,9 +57,9 @@ public class SolicitudRechazadaRNECScreenplayTest{
     }
 
     @ParameterizedTest
-    @CsvSource({ "123456799,GFuYouc4"})
-    @Title("Solicitud rechazada por información RNEC inválida")
-    public void testSolicitudRechazadaRNEC(String username, String password) throws InterruptedException {
+    @CsvSource({ "123456789,OdYlLzXa"})
+    @Title("El cliente cumple con todas las condiciones para una preoferta de crédito aprobada")
+    public void testSolicitudAprobada(String username, String password) throws InterruptedException {
 
         givenThat(cliente)
                 .attemptsTo(LoginTask.of(username, password));
@@ -69,10 +70,10 @@ public class SolicitudRechazadaRNECScreenplayTest{
                                 "CC",
                                 username,
                                 "2017/12/27",
-                                "NOMBRE PRUEBA 11",
-                                "NOMBRE PRUEBA 22",
-                                "APELLIDO PRUEBA 11",
-                                "APELLIDO PRUEBA 22",
+                                "NOMBRE PRUEBA 1",
+                                "NOMBRE PRUEBA 2",
+                                "APELLIDO PRUEBA 1",
+                                "APELLIDO PRUEBA 2",
                                 "M"
                         ),
                         LlenarPasoDosTask.of(
@@ -110,12 +111,12 @@ public class SolicitudRechazadaRNECScreenplayTest{
 
         then(analista)
                 .should(
-                        seeThat("El estado de la Solicitud es Rechazada", solicitudOverviewData.estadoSolicitud(), equalTo(SolicitudStatus.SOLICITUD_RECHAZADA)),
-                        seeThat("El estado de RNEC es No Exitoso", solicitudOverviewData.estadoValidacionRNEC(), equalTo(RNECStatus.RNEC_NO_EXITOSO)),
+                        seeThat("El estado de la Solicitud es Aprobada", solicitudOverviewData.estadoSolicitud(), equalTo(SolicitudStatus.SOLICITUD_APROBADA)),
+                        seeThat("El estado de RNEC es Completado", solicitudOverviewData.estadoValidacionRNEC(), equalTo(RNECStatus.RNEC_COMPLETADO)),
                         seeThat("El estado de Aportes es Validado", solicitudOverviewData.estadoAportesLinea(), equalTo(AportesLineaStatus.APORTES_LINEA_VALIDADO)),
                         seeThat("El estado de Centrales es Completado", solicitudOverviewData.estadoVerificacionCentrales(), equalTo(CentralesStatus.CENTRALES_COMPLETADO)),
-                        seeThat("El estado del Estudio es Pendiente", solicitudOverviewData.estadoEstudioSolicitud(), equalTo(EstudioStatus.ESTUDIO_PENDIENTE)),
-                        seeThat("El valor aprobado es 0", solicitudOverviewData.valorAprobado(), equalTo(0L))
+                        seeThat("El estado del Estudio es Aprobado", solicitudOverviewData.estadoEstudioSolicitud(), equalTo(EstudioStatus.ESTUDIO_APROBADO)),
+                        seeThat("El valor aprobado es mayor a 0", solicitudOverviewData.valorAprobado(), greaterThan(0L))
                 );
     }
 
