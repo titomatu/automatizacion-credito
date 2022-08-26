@@ -36,9 +36,9 @@ public class ReglasNegocioController {
         //log.warn("valorcuoptames {}", valorcuoptames);
         double roundDbl = Math.round(valorcuoptames*100.0)/100.0;
         //log.warn("roundDbl {}", roundDbl);
-        log.debug("TASA MES {}", tasames);
-        log.debug("PLAZO {}", plazot);
-        log.debug("CUOTA CALCULADA {} - VALOR REDONDEADO {}: ", valorcuoptames, roundDbl);
+        log.warn("TASA MES {}", tasames);
+        log.warn("PLAZO {}", plazot);
+        log.warn("CUOTA CALCULADA {} - VALOR REDONDEADO {}: ", valorcuoptames, roundDbl);
         MotorReglaResponseDto respuesta = new  MotorReglaResponseDto();
         KieSession kieSession = kieContainer.newKieSession();
         kieSession.insert(orderRequest);
@@ -50,7 +50,7 @@ public class ReglasNegocioController {
         respuesta.setMensajeS(orderRequest.getMensajeE());
         respuesta.setCodeRespuesta(orderRequest.getCodeRespuesta());
         respuesta.setNumeroSolicitud(orderRequest.getNumeroSolicitud());
-        log.debug("Resultado {} ", respuesta.getMensajeS());
+        log.warn("Resultado {} ", respuesta.getMensajeS());
         return respuesta;
     }
 }
