@@ -23,28 +23,34 @@ public class ReglasNegocioController {
 
     @PostMapping("/motor")
     private MotorReglaResponseDto getDiscountPercent(@RequestBody MotorReglaRequestDto orderRequest) {
+        log.warn("Plazo {}", orderRequest.getPlazo());
+        log.warn("Valor Solicitado {}", orderRequest.getValorSolicitado());
+        /*INICIO CALCULO CUOTA MES*/
+        Double tasa = 22.75/100;
+        //log.warn("tasa {}", tasa);
+        Double tasames = (1 +(tasa / 12));
+        //log.warn("tasames {}", tasames);
+        int plazot = (-(orderRequest.getPlazo() / 12) * 12);
+        //log.warn("plazot {}", plazot);
+        double valorcuoptames = (orderRequest.getValorSolicitado()*(tasa/12))/(1-Math.pow(tasames,plazot));
+        //log.warn("valorcuoptames {}", valorcuoptames);
+        double roundDbl = Math.round(valorcuoptames*100.0)/100.0;
+        //log.warn("roundDbl {}", roundDbl);
+        log.warn("TASA MES {}", tasames);
+        log.warn("PLAZO {}", plazot);
+        log.warn("CUOTA CALCULADA {} - VALOR REDONDEADO {}: ", valorcuoptames, roundDbl);
         MotorReglaResponseDto respuesta = new  MotorReglaResponseDto();
         KieSession kieSession = kieContainer.newKieSession();
         kieSession.insert(orderRequest);
         kieSession.fireAllRules();
         kieSession.dispose();
-        /*INICIO CALCULO CUOTA MES*/
-        Double tasa = 22.75/100;
-        //System.out.println("PLAZo---- " + orderRequest.getPlazo() + "TASA: " + tasa);
-        Double tasames = (1 +(tasa / 12));
-        int plazot = (-(orderRequest.getPlazo() / 12) * 12);
-        double valorcuoptames = (orderRequest.getValorSolicitado()*(tasa/12))/(1-Math.pow(tasames,plazot));
-        double roundDbl = Math.round(valorcuoptames*100.0)/100.0;
-        log.debug("TASA MES " + tasames);
-        log.debug("PLAZO " + plazot);
-        log.debug("CUOTA CALCULADA " + valorcuoptames + " VALOR REDONDEADO: " + roundDbl);
+        respuesta.setValorAprobado(orderRequest.getValorAprobado());
         respuesta.setValorCuota(roundDbl);
         /*FIN CALCULO CUOTA MES*/
         respuesta.setMensajeS(orderRequest.getMensajeE());
         respuesta.setCodeRespuesta(orderRequest.getCodeRespuesta());
         respuesta.setNumeroSolicitud(orderRequest.getNumeroSolicitud());
-        log.debug("Resultado: " + respuesta.getMensajeS());
-        respuesta.setValorAprobado(orderRequest.getValorAprobado());
+        log.warn("Resultado {} ", respuesta.getMensajeS());
         return respuesta;
     }
 }

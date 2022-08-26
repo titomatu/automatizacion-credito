@@ -97,6 +97,8 @@ public class SolicitudStatusUpdateEventHandler {
         solicitudDto.setNumeroSolicitud(solicitud.getNumeroSolicitud());
         solicitudDto.setReportado(solicitud.getReportado());
         solicitudDto.setPromedioAportes(solicitud.getPromedioAportes());
+        solicitudDto.setValorSolicitado(solicitud.getValorSolicitado());
+        solicitudDto.setPlazo(solicitud.getPlazo());
 
         return solicitudDto;
     }
