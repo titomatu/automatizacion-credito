@@ -9,8 +9,10 @@ import edu.patrones.demo.event.solicitud.SolicitudStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.Instant;
 
 @Data
 @NoArgsConstructor
@@ -65,4 +67,8 @@ public class Solicitud {
 
     @Column(name = "promedio_aportes")
     private Double promedioAportes;
+
+    @Column(name = "creation_date", nullable = false, updatable = false)
+    @CreationTimestamp
+    private Instant creationDate;
 }

@@ -28,12 +28,14 @@ public class ClienteDTO {
   private String tipoInmueble;
   private String estadoCivil;
 
+  private Double gastos;
+
   public ClienteDTO(String tipoDocumento, Long numeroDocumento, Date fechaExpedicion,
       String nombre1, String nombre2, String apellido1, String apellido2, Long celular,
       String correoElectronico, Double salarioMensual, Date fechaNacimiento,
       Double totalActivos, Double totalPasivos, String autorizaCentrales, String genero,
       String tipoResidencia, Integer actividadEconomica, String tipoContrato,
-      String nivelEstudios, String tipoInmueble, String estadoCivil) {
+      String nivelEstudios, String tipoInmueble, String estadoCivil, Double gastos) {
     this.tipoDocumento = tipoDocumento;
     this.numeroDocumento = numeroDocumento;
     this.fechaExpedicion = fechaExpedicion;
@@ -55,6 +57,7 @@ public class ClienteDTO {
     this.nivelEstudios = nivelEstudios;
     this.tipoInmueble = tipoInmueble;
     this.estadoCivil = estadoCivil;
+    this.gastos = gastos;
   }
 
   public String getTipoDocumento() {
@@ -223,5 +226,13 @@ public class ClienteDTO {
 
   public void setEstadoCivil(String estadoCivil) {
     this.estadoCivil = estadoCivil;
+  }
+
+  public Double getGastos() {
+    return gastos;
+  }
+
+  public void setGastos(Double gastos) {
+    this.gastos = gastos;
   }
 }

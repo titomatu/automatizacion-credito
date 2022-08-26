@@ -13,16 +13,19 @@ public class Solicitud {
   private String valorAprobado;
   private String mensaje;
 
+  private Integer plazo;
+
   public Solicitud() {
   }
 
   public Solicitud(Cliente cliente, Integer numeroSolictud, String valorSolicitado,
-      String valorAprobado, String mensaje) {
+      String valorAprobado, String mensaje, String valorGastos, Integer plazo) {
     this.cliente = cliente;
     this.numeroSolictud = numeroSolictud;
     this.valorSolicitado = valorSolicitado;
     this.valorAprobado = valorAprobado;
     this.mensaje = mensaje;
+    this.plazo = plazo;
   }
 
   public Cliente getCliente() {
@@ -65,6 +68,14 @@ public class Solicitud {
     this.mensaje = mensaje;
   }
 
+  public Integer getPlazo() {
+    return plazo;
+  }
+
+  public void setPlazo(Integer plazo) {
+    this.plazo = plazo;
+  }
+
   @Override
   public String toString() {
     final StringBuffer sb = new StringBuffer("Solicitud{");
@@ -73,6 +84,7 @@ public class Solicitud {
     sb.append(", valorSolicitado='").append(valorSolicitado).append('\'');
     sb.append(", valorAprobado='").append(valorAprobado).append('\'');
     sb.append(", mensaje='").append(mensaje).append('\'');
+    sb.append(", plazo'=").append(plazo).append('\'');
     sb.append('}');
     return sb.toString();
   }

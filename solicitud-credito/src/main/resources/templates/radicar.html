@@ -80,6 +80,12 @@
                         <option value="H">Propia con Hipoteca</option>
                         <option value="A">Arrendada</option>
                     </select>
+                    <select name="cliente.tipoContrato" class="step__input" aria-label="Default select example" required>
+                        <option selected>Tipo contrato</option>
+                        <option value="F">Fijo</option>
+                        <option value="I">Indefinido</option>
+                        <option value="O">Otro</option>
+                    </select>
                     <div class="text-center">
                         <label>
                             <input type="checkbox" name="cliente.autorizaCentrales" value="remember-me" required> Autoriza centrales
@@ -88,7 +94,7 @@
                 </div>
                 <div class="step__footer">
                     <button type="button" class="step__button step__button--back" data-to_step="1" data-step="2">Regresar</button>
-                    <button type="button" class="step__button step__button--next" data-to_step="3" data-step="2">Siguiente</button>
+                    <button type="button" class="step__button step__button--next" data-to_step="3" data-step="2"  id="btn-sig2">Siguiente</button>
                 </div>
             </div>
             <div class="step" id="step-3">
@@ -96,12 +102,6 @@
                     <h2 class="step__title">Informaion Personal<small>(Paso 3)</small></h2>
                 </div>
                 <div class="step__body">
-                    <select name="cliente.tipoContrato" class="step__input" aria-label="Default select example" required>
-                        <option selected>Tipo contrato</option>
-                        <option value="F">Fijo</option>
-                        <option value="I">Indefinido</option>
-                        <option value="O">Otro</option>
-                    </select>
                     <input type="number" name="cliente.salarioMensual" placeholder="Salario Mensual" class="step__input" required>
                     <select name="cliente.nivelEstudios" class="step__input" aria-label="Default select example" required>
                         <option selected>Nivel de Estudios</option>
@@ -123,11 +123,17 @@
                     <input type="number" name="cliente.totalActivos" placeholder="Total activos" class="step__input" required>
                     <input type="number" name="cliente.totalPasivos" placeholder="Total pasivos" class="step__input"  required>
                     <input type="number" name="valorSolicitado" placeholder="Valor Solicitado" class="step__input"  required>
-
+                    <input type="number" name="cliente.gastos" placeholder="Valor Gastos" class="step__input"  required>
+                    <select name="plazo" class="step__input" aria-label="Default select example">
+                        <option selected>Plazo Solicitado</option>
+                        <option value="12">12</option>
+                        <option value="24">24</option>
+                        <option value="60">60</option>
+                    </select>
                 </div>
                 <div class="step__footer">
                     <button type="button" class="step__button step__button--back" data-to_step="2" data-step="3">Regresar</button>
-                    <button type="submit" class="step__button">solicitar</button>
+                    <button type="submit" class="step__button" id="btn-solicitar">solicitar</button>
                 </div>
             </div>
         </div>

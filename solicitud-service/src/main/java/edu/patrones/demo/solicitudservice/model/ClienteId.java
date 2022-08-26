@@ -19,6 +19,11 @@ public class ClienteId implements Serializable {
 
     }
 
+    public ClienteId(String tipoDocumento, Long numeroDocumento) {
+        this.tipoDocumento = tipoDocumento;
+        this.numeroDocumento = numeroDocumento;
+    }
+
     //
 
     public String getTipoDocumento() {

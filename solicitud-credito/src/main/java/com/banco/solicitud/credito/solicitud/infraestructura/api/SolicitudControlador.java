@@ -40,6 +40,7 @@ public String solicitud( Model model){
     solicitudG.setCliente(solicitud.getCliente());
     solicitudG.setValorSolicitado(solicitud.getValorSolicitado());
     solicitudG.setMensaje("Bearer "+solicitud.getMensaje());
+    solicitudG.setPlazo(solicitud.getPlazo());
     System.out.println(solicitudG.toString());
    try {
      solicitudAdaptadoraDto.guardarSolicitud(solicitudG);
