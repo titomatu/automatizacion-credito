@@ -50,7 +50,7 @@ public class ReglasNegocioController {
         respuesta.setMensajeS(orderRequest.getMensajeE());
         respuesta.setCodeRespuesta(orderRequest.getCodeRespuesta());
         respuesta.setNumeroSolicitud(orderRequest.getNumeroSolicitud());
-        log.warn("Resultado {} ", respuesta.getMensajeS());
+        log.debug("Resultado {} ", respuesta.getMensajeS());
         return respuesta;
     }
 }
