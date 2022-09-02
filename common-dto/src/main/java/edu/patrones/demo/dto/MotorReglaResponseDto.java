@@ -14,5 +14,6 @@ public class MotorReglaResponseDto {
     private long valorAprobado;
     private int codeRespuesta;
     private double valorCuota;
+    private double tasaCalculada;
     private String mensajeS;
 }

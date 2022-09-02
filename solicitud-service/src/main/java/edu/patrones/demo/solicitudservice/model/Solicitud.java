@@ -68,6 +68,12 @@ public class Solicitud {
     @Column(name = "promedio_aportes")
     private Double promedioAportes;
 
+    @Column(name = "tasa_calculada")
+    private Double tasaCalculada;
+
+    @Column(name = "cuota_calculada")
+    private Double cuotaCalculada;
+
     @Column(name = "creation_date", nullable = false, updatable = false)
     @CreationTimestamp
     private Instant creationDate;

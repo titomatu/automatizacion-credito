@@ -34,18 +34,20 @@ public class ReglasNegocioController {
         //log.warn("plazot {}", plazot);
         double valorcuoptames = (orderRequest.getValorSolicitado()*(tasa/12))/(1-Math.pow(tasames,plazot));
         //log.warn("valorcuoptames {}", valorcuoptames);
-        double roundDbl = Math.round(valorcuoptames*100.0)/100.0;
+        double valorcuotaredondeada = Math.round(valorcuoptames*100.0)/100.0;
+        double tasaefecmes = tasames;
         //log.warn("roundDbl {}", roundDbl);
         log.warn("TASA MES {}", tasames);
         log.warn("PLAZO {}", plazot);
-        log.warn("CUOTA CALCULADA {} - VALOR REDONDEADO {}: ", valorcuoptames, roundDbl);
+        log.warn("CUOTA CALCULADA {} - VALOR REDONDEADO {}: ", valorcuoptames, valorcuotaredondeada);
         MotorReglaResponseDto respuesta = new  MotorReglaResponseDto();
         KieSession kieSession = kieContainer.newKieSession();
         kieSession.insert(orderRequest);
         kieSession.fireAllRules();
         kieSession.dispose();
         respuesta.setValorAprobado(orderRequest.getValorAprobado());
-        respuesta.setValorCuota(roundDbl);
+        respuesta.setValorCuota(valorcuotaredondeada);
+        respuesta.setTasaCalculada(tasaefecmes);
         /*FIN CALCULO CUOTA MES*/
         respuesta.setMensajeS(orderRequest.getMensajeE());
         respuesta.setCodeRespuesta(orderRequest.getCodeRespuesta());
