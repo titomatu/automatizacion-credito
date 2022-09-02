@@ -79,6 +79,8 @@ public class SolicitudService {
         solicitud.setSolicitudStatus(SolicitudStatus.SOLICITUD_CREADA);
         solicitud.setEstudioStatus(EstudioStatus.ESTUDIO_PENDIENTE);
         solicitud.setValorAprobado(Long.valueOf(0));
+        solicitud.setTasaCalculada(0.0);
+        solicitud.setCuotaCalculada(0.0);
 
         return solicitud;
     }

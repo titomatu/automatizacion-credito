@@ -66,7 +66,8 @@ public class EstudioService {
         }
 
         log.warn("Respuesta Motor Reglas: " + motorReglaResponseDto);
-
+        log.warn("motorReglaResponseDto: " + motorReglaResponseDto.getValorCuota());
+        log.warn("motorReglaResponseDto: " + motorReglaResponseDto.getTasaCalculada());
         return new EstudioEvent(estudioRequestDto, motorReglaResponseDto, motorReglaResponseDto.getCodeRespuesta() == 0? EstudioStatus.ESTUDIO_APROBADO : EstudioStatus.ESTUDIO_NO_APROBADO);
     }
 }
