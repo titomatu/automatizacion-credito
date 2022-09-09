@@ -17,6 +17,7 @@
 
     <modules>
         <module>common-dto</module>
+        <module>aportes-linea-service</module>
         <module>auth-service</module>
         <module>centrales-service</module>
         <module>email-service</module>
