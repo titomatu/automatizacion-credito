@@ -22,10 +22,10 @@
         <module>auth-service</module>
         <module>centrales-service</module>
         <module>email-service</module>
+        <module>estudio-solicitud-service</module>
         <module>motor-reglas-service</module>
         <module>registraduria-service</module>
         <module>solicitud-credito</module>
-        <module>solicitud-service</module>
     </modules>
 
 </project>
