@@ -15,7 +15,7 @@ pipeline {
                 if(isUnix()){
                     sh 'mvn -version'
                 } else {
-                    bat 'mvn -version'
+                    bat("mvn -version")
                 }
             }
         }
