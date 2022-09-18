@@ -5,7 +5,7 @@ pipeline {
         mvnHome = tool 'MVN3'
     }*/
     stages {
-       stage("Preparación Inicial"){
+       stage("Preparacion Inicial"){
             mvnHome = tool 'maven-3.8.6'
        }
        stage('Build') {
