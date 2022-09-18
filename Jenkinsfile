@@ -4,43 +4,9 @@ pipeline {
         maven 'maven-3.8.6'
     }
     stages {
-        stage('configuration') {
-            steps {
-                echo 'BRANCH NAME: ' + env.BRANCH_NAME
-                echo sh(returnStdout: true, script: 'env')
-            }
-        }
-        stage('Build') {
+       stage('Build') {
             steps {
                 sh 'mvn clean package'
-            }
-        }
-        stage('Testing') {
-            steps {
-                script {
-                    sh 'echo "Testing"'
-                    sh "cat file.txt"
-                }
-            }
-        }
-
-        stage("build"){
-            when {
-                branch 'main'
-            }
-
-            steps{
-                sh 'echo "Build Started"'
-            }
-        }
-
-        stage("Deploy"){
-            when {
-                branch 'main'
-            }
-
-            steps{
-                sh 'echo "Deploying App"'
             }
         }
     }
