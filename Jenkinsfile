@@ -9,6 +9,11 @@ pipeline {
                 sh 'mvn clean package'
             }
        }
+       stage('Pruebas Unitarias'){
+            steps {
+                echo 'Pruebas Unitarias'
+            }
+       }
     }
 
     post{
