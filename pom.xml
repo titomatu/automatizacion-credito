@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>automatizacion-credito</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>automatizacion-credito</name>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.7</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <modules>
+        <module>common-dto</module>
+        <module>solicitud-service</module>
+        <module>aportes-linea-service</module>
+        <module>auth-service</module>
+        <module>centrales-service</module>
+        <module>email-service</module>
+        <module>estudio-solicitud-service</module>
+        <module>motor-reglas-service</module>
+        <module>registraduria-service</module>
+        <module>solicitud-credito</module>
+    </modules>
+
+</project>
