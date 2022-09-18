@@ -12,7 +12,11 @@ pipeline {
         }
         stage('maven') {
             steps {
-                sh 'mvn -version'
+                if(isUnix())}{
+                    sh 'mvn -version'
+                } else {
+                    bat 'mvn -version'
+                }
             }
         }
         stage('Testing') {
