@@ -11,18 +11,18 @@ pipeline {
        }
        stage('Pruebas Unitarias'){
             steps {
-                echo 'Pruebas Unitarias'
+                sh 'mvn test -Dtest=ReglasNegocioControllerTest -pl motor-reglas-service'
             }
        }
        stage('Pruebas Integración'){
             steps {
-                sh 'mvn test -Dtest=ReglasNegocioControllerTest -pl motor-reglas-service'
+                sh 'mvn test -Dtest=CentralesServiceTest -pl centrales-service'
             }
        }
        stage('Despliegue en QA'){
             when{branch 'development'}
             steps {
-                echo 'Depliegue en QA'
+                echo 'Despliegue en QA'
             }
        }
     }
