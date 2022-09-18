@@ -14,6 +14,11 @@ pipeline {
                 echo 'Pruebas Unitarias'
             }
        }
+       stage('Pruebas Integración'){
+            steps {
+                sh 'mvn test -Dtest=ReglasNegocioControllerTest -pl motor-reglas-service'
+            }
+       }
        stage('Despliegue en QA'){
             when{branch 'development'}
             steps {

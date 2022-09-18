@@ -22,7 +22,7 @@ public class ReglasNegocioController {
 
 
     @PostMapping("/motor")
-    private MotorReglaResponseDto getDiscountPercent(@RequestBody MotorReglaRequestDto orderRequest) {
+    public MotorReglaResponseDto getDiscountPercent(@RequestBody MotorReglaRequestDto orderRequest) {
         log.warn("Plazo {}", orderRequest.getPlazo());
         log.warn("Valor Solicitado {}", orderRequest.getValorSolicitado());
         /*INICIO CALCULO CUOTA MES*/
