@@ -10,15 +10,6 @@ pipeline {
                 echo sh(returnStdout: true, script: 'env')
             }
         }
-        stage('maven') {
-            steps {
-                if (isUnix()) {
-                    sh 'mvn -version'
-                } else {
-                    bat("mvn -version")
-                }
-            }
-        }
         stage('Build') {
             steps {
                 sh 'mvn clean package'
