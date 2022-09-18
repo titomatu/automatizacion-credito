@@ -15,9 +15,9 @@ pipeline {
             }
        }
        stage('Despliegue en QA'){
-            when{brancg 'development'}
+            when{branch 'development'}
             steps {
-                echo 'Desplieqgue en QA'
+                echo 'Depliegue en QA'
             }
        }
     }
