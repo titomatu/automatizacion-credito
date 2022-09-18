@@ -4,45 +4,27 @@ pipeline {
         maven 'maven-3.8.6'
     }
     stages {
-        stage('configuration') {
+       stage('Build') {
             steps {
-                echo 'BRANCH NAME: ' + env.BRANCH_NAME
-                echo sh(returnStdout: true, script: 'env')
+                sh 'mvn clean package'
             }
-        }
-        stage('maven') {
+       }
+       stage('Pruebas Unitarias'){
             steps {
-                sh 'mvn -version'
+                sh 'mvn test -Dtest=CentralesServiceTest -pl centrales-service'
             }
-        }
-        stage('Testing') {
+       }
+       stage('Pruebas Integración'){
             steps {
-                script {
-                    sh 'echo "Testing"'
-                    sh "cat file.txt"
-                }
+                sh 'mvn test -Dtest=ReglasNegocioControllerTest -pl motor-reglas-service'
             }
-        }
-
-        stage("build"){
-            when {
-                branch 'main'
+       }
+       stage('Despliegue en QA'){
+            when{branch 'development'}
+            steps {
+                echo 'Despliegue en QA'
             }
-
-            steps{
-                sh 'echo "Build Started"'
-            }
-        }
-
-        stage("Deploy"){
-            when {
-                branch 'main'
-            }
-
-            steps{
-                sh 'echo "Deploying App"'
-            }
-        }
+       }
     }
 
     post{
