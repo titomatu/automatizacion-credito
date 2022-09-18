@@ -8,12 +8,12 @@ pipeline {
             steps {
                 sh 'mvn clean package'
             }
-        }
-        stage('OS'){
+       }
+       stage('OS'){
             if (SystemUtils.IS_OS_UNIX || SystemUtils.IS_OS_MAC) {
                 echo 'MAC'
             }
-        }
+       }
     }
 
     post{
