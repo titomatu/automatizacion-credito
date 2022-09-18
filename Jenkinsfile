@@ -10,8 +10,10 @@ pipeline {
             }
        }
        stage('OS'){
-            if (SystemUtils.IS_OS_UNIX || SystemUtils.IS_OS_MAC) {
-                echo 'MAC'
+            steps {
+                if (SystemUtils.IS_OS_UNIX || SystemUtils.IS_OS_MAC) {
+                    echo 'MAC'
+                }
             }
        }
     }
