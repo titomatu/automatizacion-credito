@@ -14,6 +14,12 @@ pipeline {
                 echo 'Pruebas Unitarias'
             }
        }
+       stage('Despliegue en QA'){
+            when{brancg 'development'}
+            steps {
+                echo 'Desplieqgue en QA'
+            }
+       }
     }
 
     post{
