@@ -1,21 +1,12 @@
 pipeline {
     agent any
-    /*tools {
-        //maven 'maven-3.8.6'
-        mvnHome = tool 'MVN3'
-    }*/
+    tools {
+        maven 'maven-3.8.6'
+    }
     stages {
-       stage("Preparacion Inicial"){
-            mvnHome = tool 'maven-3.8.6'
-       }
        stage('Build') {
-            /*steps {
+            steps {
                 sh 'mvn clean package'
-            }*/
-            if(isUnix()){
-                sh "'${mvnHome}/bin/mvn' clean package"
-            } else {
-                bat(/"${mvnHome}\bin\mvn" clean package/)
             }
        }
        stage('Pruebas Unitarias'){
