@@ -12,7 +12,7 @@ pipeline {
         }
         stage('maven') {
             steps {
-                if(isUnix())}{
+                if(isUnix()){
                     sh 'mvn -version'
                 } else {
                     bat 'mvn -version'
