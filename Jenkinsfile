@@ -22,7 +22,7 @@ pipeline {
        stage('Despliegue en QA'){
             when{branch 'development'}
             steps {
-                echo 'Despliegue en QA'
+                sh 'java -version'
             }
        }
     }
