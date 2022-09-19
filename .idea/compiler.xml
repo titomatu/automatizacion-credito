@@ -18,7 +18,7 @@
         <module name="aportes-linea-service" />
         <module name="motor-reglas-service" />
       </profile>
-      <profile name="Annotation profile for solicitud-credito" enabled="true">
+      <profile name="Annotation profile for automatizacion-credito" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
