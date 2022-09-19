@@ -22,7 +22,7 @@ pipeline {
        stage('Despliegue en QA'){
             //when{branch 'development'}
             steps {
-                sh 'java -version'
+                sh 'java -jar /Users/titoandres-maturana/.jenkins/workspace/solicitud-credito/webapp-automatizacion-credito/solicitud-service/target/solicitud-service-0.0.1-SNAPSHOT.jar'
             }
        }
     }
