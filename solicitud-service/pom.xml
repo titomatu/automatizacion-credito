@@ -24,7 +24,7 @@
         <webdriver.base.url></webdriver.base.url>
     </properties>
 
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
