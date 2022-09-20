@@ -21,6 +21,12 @@ node {
         sh 'mvn test -Dtest=CentralesServiceTest -pl centrales-service'
    }
 
+   stage('Build Contenedores de la Aplicación'){
+        //when{branch 'development'}
+        sh 'cd solicitud-service/'
+        sh 'docker build -t tamatu/solicitud-service:latest .'
+   }
+
    post
    {
         success
