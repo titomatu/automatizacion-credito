@@ -1,8 +1,7 @@
 pipeline {
-    agent none
+    agent any
     tools {
         maven 'maven-3.8.6'
-        //
     }
     stages {
        stage('Build') {
@@ -22,7 +21,6 @@ pipeline {
        }
        stage('Build Contenedores de la Aplicación'){
             //when{branch 'development'}
-            agent any
             steps {
                 sh 'cd solicitud-service/'
                 sh 'docker build -t tamatu/solicitud-service:latest .'
