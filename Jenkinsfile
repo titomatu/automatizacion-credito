@@ -14,6 +14,6 @@ node {
 
     stage('verify')
     {
-        echo '${dockerHome}'
+        echo dockerHome
     }
 }
