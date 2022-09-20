@@ -34,7 +34,7 @@ pipeline {
             //when{branch 'development'}
             ///Applications/Docker.app/Contents/Resources/bin/
             steps {
-                sh 'docker version'
+                sh 'docker --no-cache version'
             }
        }
        stage('Push Contenedores de la Aplicación'){
