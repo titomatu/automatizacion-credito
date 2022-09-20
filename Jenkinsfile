@@ -12,8 +12,8 @@ node {
         checkout scm
     }
 
-    stage('verify')
+    stage('Verificar Docker')
     {
-        echo dockerHome
+        sh 'docker info'
     }
 }
