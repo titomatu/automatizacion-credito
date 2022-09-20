@@ -19,10 +19,19 @@ pipeline {
                 sh 'mvn test -Dtest=ReglasNegocioControllerTest -pl motor-reglas-service'
             }
        }
-       stage('Despliegue en QA'){
+       stage('Build Contenedores de la Aplicación'){
             //when{branch 'development'}
             steps {
-                sh 'java -jar /Users/titoandres-maturana/.jenkins/workspace/solicitud-credito/webapp-automatizacion-credito/solicitud-service/target/solicitud-service-0.0.1-SNAPSHOT.jar'
+                script{
+                    sh 'cd solicitud-service/'
+                    sh 'docker build -t tamatu/solicitud-service'
+                }
+            }
+       }
+       stage('Push Contenedores de la Aplicación'){
+            //when{branch 'development'}
+            steps {
+                sh 'Push Contenedores'
             }
        }
     }
