@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script{
                     sh 'cd solicitud-service/'
-                    sh 'docker build -t tamatu/solicitud-service'
+                    sh 'docker build -t tamatu/solicitud-service .'
                 }
             }
        }
