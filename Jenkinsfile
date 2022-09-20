@@ -55,6 +55,10 @@ pipeline {
                 dir("registraduria-service") {
                     sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/registraduria-service .'
                 }
+
+                dir("solicitud-credito") {
+                    sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/solicitud-credito .'
+                }
             }
        }
        stage('Push Contenedores de la Aplicación'){
@@ -68,6 +72,7 @@ pipeline {
                 sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/estudio-solicitud-service:latest'
                 sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/motor-reglas-service:latest'
                 sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/registraduria-service:latest'
+                sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/solicitud-credito:latest'
             }
        }
     }
