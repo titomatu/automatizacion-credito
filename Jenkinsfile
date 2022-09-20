@@ -1,5 +1,5 @@
-pipeline {
-    agent any
+node {
+    agent none
     tools {
         maven 'maven-3.8.6'
     }
