@@ -27,6 +27,10 @@ pipeline {
                     sh 'cd solicitud-service/'
                     sh 'docker build -t tamatu/solicitud-service .'
                 }
+                script{
+                    sh 'cd motor-reglas-service/'
+                    sh 'docker build -t tamatu/motor-reglas-service .'
+                }
             }
        }
        stage('Push Contenedores de la Aplicación'){
