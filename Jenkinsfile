@@ -2,11 +2,11 @@ pipeline {
     agent any
     tools {
         maven 'maven-3.8.6'
-        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
+        //'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
     }
 
     environment {
-        DOCKER_CERT_PATH = credentials('docker')
+        //DOCKER_CERT_PATH = credentials('docker')
         //once you sign up for Docker hub, use that user_id here
         registry = "tamatu/solicitud-service"
         //- update your credentials ID after creating credentials for connecting to Docker Hub
