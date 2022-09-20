@@ -32,7 +32,7 @@ pipeline {
             //when{branch 'development'}
             ///Applications/Docker.app/Contents/Resources/bin/
             steps {
-                sh 'docker version'
+                sh '/Applications/Docker.app/Contents/Resources/bin/docker --version'
             }
        }
        stage('Push Contenedores de la Aplicación'){
