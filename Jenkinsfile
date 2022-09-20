@@ -40,7 +40,7 @@ pipeline {
        stage('Push Contenedores de la Aplicación'){
             //when{branch 'development'}
             steps {
-                echo 'Push Contenedores'
+                echo 'Push Contenedores.'
             }
        }
     }
