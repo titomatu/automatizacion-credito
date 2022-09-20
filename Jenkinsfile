@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_CERT_PATH = credentials('id-for-a-docker-cred')
+        DOCKER_CERT_PATH = credentials('0d3afa65-4dbb-4bd5-bba4-a41c814120d5')
         //once you sign up for Docker hub, use that user_id here
         registry = "tamatu/solicitud-service"
         //- update your credentials ID after creating credentials for connecting to Docker Hub
