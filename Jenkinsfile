@@ -45,10 +45,6 @@ pipeline {
         failure {
             setBuildStatus("Build failed", "FAILURE");
         }
-
-		always {
-			sh 'docker logout'
-		}
     }
 }
 
