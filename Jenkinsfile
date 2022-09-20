@@ -32,8 +32,9 @@ pipeline {
             //when{branch 'development'}
             ///Applications/Docker.app/Contents/Resources/bin/
             steps {
-                sh 'cd solicitud-service'
-                sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/solicitud-service .'
+                dir("solicitud-service") {
+                    sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/solicitud-service .'
+                }
             }
        }
        stage('Push Contenedores de la Aplicación'){
