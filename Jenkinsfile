@@ -4,10 +4,6 @@ pipeline {
         maven 'maven-3.8.6'
     }
 
-    environment {
-        DOCKERHUB_CREDENTIALS=credentials('0d3afa65-4dbb-4bd5-bba4-a41c814120d5')
-    }
-
     stages {
        stage('Build') {
             steps {
