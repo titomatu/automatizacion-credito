@@ -13,15 +13,24 @@ node {
 
    stage('Build')
    {
-        steps {
-            sh 'mvn clean package -DskipTests'
-        }
+        sh 'mvn clean package -DskipTests'
    }
 
    stage('Pruebas Unitarias')
    {
-        steps {
-            sh 'mvn test -Dtest=CentralesServiceTest -pl centrales-service'
+        sh 'mvn test -Dtest=CentralesServiceTest -pl centrales-service'
+   }
+
+   post
+   {
+        success
+        {
+            setBuildStatus("Build succeeded", "SUCCESS");
+        }
+
+        failure
+        {
+            setBuildStatus("Build failed", "FAILURE");
         }
    }
 }
