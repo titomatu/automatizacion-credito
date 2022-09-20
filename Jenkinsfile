@@ -1,45 +1,48 @@
-node {
-    stage('Initialize')
-    {
-        def dockerHome = tool 'maven-3.8.6'
-        def mavenHome  = tool 'docker-latest'
-        env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+pipeline {
+    agent any
+    tools {
+        maven 'maven-3.8.6'
+    }
+    stages {
+       stage('Build') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+       }
+       stage('Pruebas Unitarias'){
+            steps {
+                sh 'mvn test -Dtest=CentralesServiceTest -pl centrales-service'
+            }
+       }
+       stage('Pruebas Integración'){
+            steps {
+                sh 'mvn test -Dtest=ReglasNegocioControllerTest -pl motor-reglas-service'
+            }
+       }
+       stage('Build Contenedores de la Aplicación'){
+            //when{branch 'development'}
+            steps {
+                sh 'cd solicitud-service/'
+                //sh 'docker build -t tamatu/solicitud-service:latest .'
+            }
+       }
+       stage('Push Contenedores de la Aplicación'){
+            //when{branch 'development'}
+            steps {
+                echo 'Push Contenedores'
+            }
+       }
     }
 
-    stage('Checkout') 
-    {
-        checkout scm
-    }
-
-   stage('Build')
-   {
-        sh 'mvn clean package -DskipTests'
-   }
-
-   stage('Pruebas Unitarias')
-   {
-        sh 'mvn test -Dtest=CentralesServiceTest -pl centrales-service'
-   }
-
-   stage('Build Contenedores de la Aplicación'){
-        //when{branch 'development'}
-        sh 'cd solicitud-service/'
-        //sh 'docker build -t tamatu/solicitud-service:latest .'
-        sh 'docker info'
-   }
-
-   post
-   {
-        success
-        {
+    post{
+        success{
             setBuildStatus("Build succeeded", "SUCCESS");
         }
 
-        failure
-        {
+        failure {
             setBuildStatus("Build failed", "FAILURE");
         }
-   }
+    }
 }
 
 void setBuildStatus(String message, String state) {
