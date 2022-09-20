@@ -23,14 +23,8 @@ pipeline {
        stage('Build Contenedores de la Aplicación'){
             //when{branch 'development'}
             steps {
-                script{
-                    sh 'cd solicitud-service/'
-                    sh 'docker build -t tamatu/solicitud-service .'
-                }
-                script{
-                    sh 'cd motor-reglas-service/'
-                    sh 'docker build -t tamatu/motor-reglas-service .'
-                }
+                sh 'cd solicitud-service/'
+                sh 'docker build -t tamatu/solicitud-service .'
             }
        }
        stage('Push Contenedores de la Aplicación'){
