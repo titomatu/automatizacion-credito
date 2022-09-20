@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'maven-3.8.6'
-        //'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
+        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
     }
 
     environment {
