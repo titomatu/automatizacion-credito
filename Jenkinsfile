@@ -32,6 +32,7 @@ pipeline {
        }
        stage('Build Contenedores de la Aplicación'){
             //when{branch 'development'}
+            ///Applications/Docker.app/Contents/Resources/bin/
             steps {
                 sh 'docker version'
             }
