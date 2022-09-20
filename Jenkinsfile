@@ -27,12 +27,18 @@ pipeline {
                 dir("solicitud-service") {
                     sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/solicitud-service .'
                 }
+                dir("aportes-linea-service") {
+                    sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/aportes-linea-service .'
+                }
             }
        }
        stage('Push Contenedores de la Aplicación'){
             //when{branch 'development'}
             steps {
                 sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/solicitud-service:latest'
+            }
+            steps {
+                sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/aportes-linea-service:latest'
             }
        }
     }
