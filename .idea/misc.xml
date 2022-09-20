@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/aportes-linea-service" />
+    <file type="web" url="file://$PROJECT_DIR$/auth-service" />
+    <file type="web" url="file://$PROJECT_DIR$/centrales-service" />
+    <file type="web" url="file://$PROJECT_DIR$/email-service" />
+    <file type="web" url="file://$PROJECT_DIR$/estudio-solicitud-service" />
+    <file type="web" url="file://$PROJECT_DIR$/motor-reglas-service" />
+    <file type="web" url="file://$PROJECT_DIR$/registraduria-service" />
+    <file type="web" url="file://$PROJECT_DIR$/solicitud-credito" />
+    <file type="web" url="file://$PROJECT_DIR$/solicitud-service" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
