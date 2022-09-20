@@ -24,13 +24,12 @@ pipeline {
             //when{branch 'development'}
             steps {
                 sh 'cd solicitud-service/'
-                sh 'docker build -t tamatu/solicitud-service .'
             }
        }
        stage('Push Contenedores de la Aplicación'){
             //when{branch 'development'}
             steps {
-                sh 'Push Contenedores'
+                echo 'Push Contenedores'
             }
        }
     }
