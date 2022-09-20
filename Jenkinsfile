@@ -21,7 +21,7 @@ pipeline {
             }
        }
        stage('Build Contenedores de la Aplicación'){
-            //when{branch 'development'}
+            when{branch 'development'}
             ///Applications/Docker.app/Contents/Resources/bin/
             steps {
                 dir("solicitud-service") {
@@ -62,7 +62,7 @@ pipeline {
             }
        }
        stage('Push Contenedores de la Aplicación'){
-            //when{branch 'development'}
+            when{branch 'development'}
             steps {
                 sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/solicitud-service:latest'
                 sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/aportes-linea-service:latest'
