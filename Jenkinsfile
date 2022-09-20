@@ -33,9 +33,7 @@ pipeline {
        stage('Build Contenedores de la Aplicación'){
             //when{branch 'development'}
             steps {
-                script {
-                    dockerImage = docker.build registry
-                }
+                sh 'docker version'
             }
        }
        stage('Push Contenedores de la Aplicación'){
