@@ -12,7 +12,7 @@ node {
         checkout scm
     }
 
-    stage(('verify')
+    stage('verify')
     {
         echo '${dockerHome}'
     }
