@@ -40,7 +40,7 @@ pipeline {
        stage('Push Contenedores de la Aplicación'){
             //when{branch 'development'}
             steps {
-                echo 'Push Contenedores'
+                echo '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/solicitud-service:latest'
             }
        }
     }
