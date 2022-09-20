@@ -1,20 +1,68 @@
 pipeline {
-  agent any
-  tools {
-    // a bit ugly because there is no `@Symbol` annotation for the DockerTool
-    // see the discussion about this in PR 77 and PR 52:
-    // https://github.com/jenkinsci/docker-commons-plugin/pull/77#discussion_r280910822
-    // https://github.com/jenkinsci/docker-commons-plugin/pull/52
-    'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
-  }
-  environment {
-    DOCKER_CERT_PATH = credentials('docker')
-  }
-  stages {
-    stage('foo') {
-      steps {
-        sh "docker version" // DOCKER_CERT_PATH is automatically picked up by the Docker client
-      }
+    agent any
+    tools {
+        maven 'maven-3.8.6'
+        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
     }
-  }
+
+    environment {
+        DOCKER_CERT_PATH = credentials('docker')
+        //once you sign up for Docker hub, use that user_id here
+        registry = "tamatu/solicitud-service"
+        //- update your credentials ID after creating credentials for connecting to Docker Hub
+        registryCredential = '0d3afa65-4dbb-4bd5-bba4-a41c814120d5'
+        dockerImage = ''
+    }
+
+    stages {
+       stage('Build') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+       }
+       stage('Pruebas Unitarias'){
+            steps {
+                sh 'mvn test -Dtest=CentralesServiceTest -pl centrales-service'
+            }
+       }
+       stage('Pruebas Integración'){
+            steps {
+                sh 'mvn test -Dtest=ReglasNegocioControllerTest -pl motor-reglas-service'
+            }
+       }
+       stage('Build Contenedores de la Aplicación'){
+            //when{branch 'development'}
+            steps {
+                script {
+                    dockerImage = docker.build registry
+                }
+            }
+       }
+       stage('Push Contenedores de la Aplicación'){
+            //when{branch 'development'}
+            steps {
+                echo 'Push Contenedores'
+            }
+       }
+    }
+
+    post{
+        success{
+            setBuildStatus("Build succeeded", "SUCCESS");
+        }
+
+        failure {
+            setBuildStatus("Build failed", "FAILURE");
+        }
+    }
+}
+
+void setBuildStatus(String message, String state) {
+    step([
+        $class: "GitHubCommitStatusSetter",
+        reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://https://github.com/titomatu/automatizacion-credito"],
+        contextSource: [$class: "ManuallyEnteredCommitContextSource", context: "ci/jenkins/build-status"],
+        errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
+        statusResultSource: [$class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]]]
+    ]);
 }
