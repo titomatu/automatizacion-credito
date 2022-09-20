@@ -1,13 +1,9 @@
-node {
+pipeline {
+    agent any
+    tools {
+        maven 'maven-3.8.6'
+    }
     stages {
-       stage('Initialize'){
-            def dockerHome = tool 'MyDocker'
-            def mavenHome  = tool 'MyMaven'
-            env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
-       }
-       stage('Checkout'){
-            checkout scm
-       }
        stage('Build') {
             steps {
                 sh 'mvn clean package -DskipTests'
@@ -27,8 +23,7 @@ node {
             //when{branch 'development'}
             steps {
                 sh 'cd solicitud-service/'
-                echo '${dockerHome}'
-                //sh 'docker build -t tamatu/solicitud-service:latest .'
+                sh 'docker build -t tamatu/solicitud-service:latest .'
             }
        }
        stage('Push Contenedores de la Aplicación'){
