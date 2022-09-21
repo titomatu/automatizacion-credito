@@ -18,6 +18,7 @@ pipeline {
        }
        stage('Pruebas Integración'){
             steps {
+                sh 'mvn clean install -pl motor-reglas-service'
                 sh 'mvn test -Dtest=ReglasNegocioControllerTest -pl motor-reglas-service'
             }
        }
