@@ -91,7 +91,7 @@ public class SolicitudAprobadaCScreenplayTest {
                                 "2",
                                 "20000000",
                                 "20000000",
-                                "20000000",
+                                "1500000",
                                 "50000000",
                                 "60"
                         )

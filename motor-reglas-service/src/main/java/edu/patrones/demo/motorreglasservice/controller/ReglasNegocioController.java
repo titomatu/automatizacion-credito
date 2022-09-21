@@ -40,11 +40,26 @@ public class ReglasNegocioController {
         log.warn("TASA MES {}", tasames);
         log.warn("PLAZO {}", plazot);
         log.warn("CUOTA CALCULADA {} - VALOR REDONDEADO {}: ", valorcuoptames, valorcuotaredondeada);
+
+        /*Se validan el total de ingresos - gastos y factor de ajuste*/
+        log.warn("SalarioAportes {} - Gastos {} ", orderRequest.getSalarioAportes(), orderRequest.getGastos());
+        double totalingresmengastos = orderRequest.getSalarioAportes() - orderRequest.getGastos();
+        double factorajuste = (totalingresmengastos * 40 / 100);
+        log.warn("factorajuste {} - totalingresmengastos {} ", factorajuste, totalingresmengastos);
+        double totalingresos = totalingresmengastos - factorajuste;
+        log.warn("totalingresos {} ", totalingresos);
+
         MotorReglaResponseDto respuesta = new  MotorReglaResponseDto();
         KieSession kieSession = kieContainer.newKieSession();
         kieSession.insert(orderRequest);
         kieSession.fireAllRules();
         kieSession.dispose();
+
+        if (valorcuotaredondeada > totalingresos){
+            orderRequest.setCodeRespuesta(1699);
+            orderRequest.setMensajeE("Valor de la cuota > A Ingresos");
+            respuesta.setValorAprobado(0);
+        }
         respuesta.setValorAprobado(orderRequest.getValorAprobado());
         respuesta.setValorCuota(valorcuotaredondeada);
         respuesta.setTasaCalculada(tasaefecmes);
