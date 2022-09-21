@@ -12,12 +12,20 @@ pipeline {
        }
        stage('Pruebas Unitarias'){
             steps {
+                sh 'mvn clean install -pl centrales-service'
                 sh 'mvn test -Dtest=CentralesServiceTest -pl centrales-service'
             }
        }
        stage('Pruebas Integración'){
             steps {
+                sh 'mvn clean install -pl motor-reglas-service'
                 sh 'mvn test -Dtest=ReglasNegocioControllerTest -pl motor-reglas-service'
+            }
+       }
+       stage('Reporte SonarQube'){
+            when{branch 'development'}
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.projectKey=preoferta_credito_automatizado -Dsonar.host.url=http://localhost:9000 -Dsonar.login=af14b5e072531448ab9a3d64145a1b0e76ec06f9'
             }
        }
        stage('Build Contenedores de la Aplicación'){
