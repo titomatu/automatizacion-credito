@@ -3,46 +3,86 @@ pipeline {
     tools {
         maven 'maven-3.8.6'
     }
+
     stages {
-        stage('configuration') {
+       stage('Build') {
             steps {
-                echo 'BRANCH NAME: ' + env.BRANCH_NAME
-                echo sh(returnStdout: true, script: 'env')
+                sh 'mvn clean package -DskipTests'
             }
-        }
-        stage('maven') {
+       }
+       stage('Pruebas Unitarias'){
             steps {
-                sh 'mvn -version'
+                sh 'mvn clean install -pl centrales-service'
+                sh 'mvn test -Dtest=CentralesServiceTest -pl centrales-service'
             }
-        }
-        stage('Testing') {
+       }
+       stage('Pruebas Integración'){
             steps {
-                script {
-                    sh 'echo "Testing"'
-                    sh "cat file.txt"
+                sh 'mvn clean install -pl motor-reglas-service'
+                sh 'mvn test -Dtest=ReglasNegocioControllerTest -pl motor-reglas-service'
+            }
+       }
+       stage('Reporte SonarQube'){
+            when{branch 'development'}
+            steps {
+                sh 'mvn sonar:sonar -Dsonar.projectKey=preoferta_credito_automatizado -Dsonar.host.url=http://localhost:9000 -Dsonar.login=af14b5e072531448ab9a3d64145a1b0e76ec06f9'
+            }
+       }
+       stage('Build Contenedores de la Aplicación'){
+            when{branch 'development'}
+            ///Applications/Docker.app/Contents/Resources/bin/
+            steps {
+                dir("solicitud-service") {
+                    sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/solicitud-service .'
+                }
+
+                dir("aportes-linea-service") {
+                    sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/aportes-linea-service .'
+                }
+
+                dir("auth-service") {
+                    sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/auth-service .'
+                }
+
+                dir("centrales-service") {
+                    sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/centrales-service .'
+                }
+
+                dir("email-service") {
+                    sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/email-service .'
+                }
+
+                dir("estudio-solicitud-service") {
+                    sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/estudio-solicitud-service .'
+                }
+
+                dir("motor-reglas-service") {
+                    sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/motor-reglas-service .'
+                }
+
+                dir("registraduria-service") {
+                    sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/registraduria-service .'
+                }
+
+                dir("solicitud-credito") {
+                    sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t tamatu/solicitud-credito .'
                 }
             }
-        }
-
-        stage("build"){
-            when {
-                branch 'main'
+       }
+       stage('Push Contenedores de la Aplicación'){
+            when{branch 'development'}
+            steps {
+                sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/solicitud-service:latest'
+                sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/aportes-linea-service:latest'
+                sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/auth-service:latest'
+                sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/centrales-service:latest'
+                sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/email-service:latest'
+                sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/estudio-solicitud-service:latest'
+                sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/motor-reglas-service:latest'
+                sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/registraduria-service:latest'
+                sh '/Applications/Docker.app/Contents/Resources/bin/docker push tamatu/solicitud-credito:latest'
             }
-
-            steps{
-                sh 'echo "Build Started"'
-            }
-        }
-
-        stage("Deploy"){
-            when {
-                branch 'main'
-            }
-
-            steps{
-                sh 'echo "Deploying App"'
-            }
-        }
+       }
     }
 
     post{

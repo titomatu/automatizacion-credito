@@ -90,7 +90,7 @@ public class SolicitudRechazadaCentralesScreenplayTest {
                                 "2",
                                 "20000000",
                                 "20000000",
-                                "20000000",
+                                "1200000",
                                 "50000000",
                                 "60"
                         )
