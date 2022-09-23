@@ -1,4 +1,4 @@
-package edu.patrones.demo.motorreglasservice;
+package edu.patrones.demo.motorreglasservice.integration;
 
 import edu.patrones.demo.dto.MotorReglaRequestDto;
 import edu.patrones.demo.dto.MotorReglaResponseDto;
