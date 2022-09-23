@@ -12,6 +12,8 @@ pipeline {
        }
        stage('Pruebas Unitarias'){
             steps {
+                sh 'mvn clean install -pl common-dto'
+                sh 'mvn test -pl common-dto'
                 sh 'mvn clean install -pl aportes-linea-service'
                 sh 'mvn test -pl aportes-linea-service'
                 sh 'mvn clean install -pl centrales-service'
@@ -22,8 +24,6 @@ pipeline {
                 sh 'mvn test -pl estudio-solicitud-service'
                 sh 'mvn clean install -pl registraduria-service'
                 sh 'mvn test -pl registraduria-service'
-                sh 'mvn clean install -pl common-dto'
-                sh 'mvn test -pl common-dto'
             }
        }
        stage('Pruebas Integración'){
