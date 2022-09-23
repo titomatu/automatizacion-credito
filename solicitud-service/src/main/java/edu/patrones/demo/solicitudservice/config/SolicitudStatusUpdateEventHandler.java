@@ -92,7 +92,6 @@ public class SolicitudStatusUpdateEventHandler {
         clienteDto.setFechaExpedicion(solicitud.getCliente().getFechaExpedicion());
         clienteDto.setFechaNacimiento(solicitud.getCliente().getFechaNacimiento());
         clienteDto.setSalarioMensual(solicitud.getCliente().getSalarioMensual());
-        clienteDto.setGastos(solicitud.getCliente().getGastos());
 
         solicitudDto.setClienteDto(clienteDto);
         solicitudDto.setNumeroSolicitud(solicitud.getNumeroSolicitud());

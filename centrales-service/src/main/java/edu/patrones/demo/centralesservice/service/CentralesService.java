@@ -17,12 +17,8 @@ import java.util.Optional;
 @Service
 public class CentralesService {
 
-    private UsuarioRepository usuarioRepository;
-
     @Autowired
-    public CentralesService(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
-    }
+    private UsuarioRepository usuarioRepository;
 
     @Transactional
     public CentralesEvent nuevaSolicitud(SolicitudEvent solicitudEvent){
