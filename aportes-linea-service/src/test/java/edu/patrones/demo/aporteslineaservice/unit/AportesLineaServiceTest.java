@@ -1,6 +1,7 @@
 package edu.patrones.demo.aporteslineaservice.unit;
 
 import edu.patrones.demo.aporteslineaservice.model.InformacionAportes;
+import edu.patrones.demo.aporteslineaservice.model.InformacionAportesId;
 import edu.patrones.demo.aporteslineaservice.repository.AportesLineaRepository;
 import edu.patrones.demo.aporteslineaservice.service.AportesLineaService;
 import edu.patrones.demo.dto.ClienteDto;
@@ -14,6 +15,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
@@ -44,7 +48,7 @@ public class AportesLineaServiceTest {
         solicitudDto.setNumeroSolicitud(UUID.randomUUID().toString());
         solicitudEvent.setSolicitudDto(solicitudDto);
 
-        when(aportesLineaRepository.findByTipoDocumentoAndNumeroDocumento(any(String.class), any(Long.class)))
+        when(aportesLineaRepository.findByAportesId_TipoDocumentoAndAportesId_NumeroDocumento(any(String.class), any(Long.class)))
                 .thenReturn(new ArrayList<>());
 
         AportesLineaEvent aportesLineaEvent = aportesLineaService.nuevaSolicitud(solicitudEvent);
@@ -54,7 +58,9 @@ public class AportesLineaServiceTest {
     }
 
     @Test
-    public void promedioClienteMayorCeros(){
+    public void promedioClienteMayorCeros() throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
+
         SolicitudEvent solicitudEvent = new SolicitudEvent();
         SolicitudDto solicitudDto = new SolicitudDto();
         ClienteDto clienteDto = new ClienteDto();
@@ -68,17 +74,21 @@ public class AportesLineaServiceTest {
 
         InformacionAportes info1 = new InformacionAportes();
 
-        info1.setAportesId(clienteDto.getNumeroDocumento());
-        info1.setNumeroDocumento(clienteDto.getNumeroDocumento());
+        info1.setAportesId(
+                new InformacionAportesId(1,
+                        clienteDto.getTipoDocumento(), clienteDto.getNumeroDocumento(), formatter.parse("30-11-2020"))
+        );
         info1.setPagoRealizado(7500000D);
 
         InformacionAportes info2 = new InformacionAportes();
 
-        info2.setAportesId(clienteDto.getNumeroDocumento());
-        info2.setNumeroDocumento(clienteDto.getNumeroDocumento());
+        info2.setAportesId(
+                new InformacionAportesId(1,
+                        clienteDto.getTipoDocumento(), clienteDto.getNumeroDocumento(), formatter.parse("30-12-2020"))
+        );
         info2.setPagoRealizado(8500000D);
 
-        when(aportesLineaRepository.findByTipoDocumentoAndNumeroDocumento(any(String.class), any(Long.class)))
+        when(aportesLineaRepository.findByAportesId_TipoDocumentoAndAportesId_NumeroDocumento(any(String.class), any(Long.class)))
                 .thenReturn(Arrays.asList(info1, info2));
 
         AportesLineaEvent aportesLineaEvent = aportesLineaService.nuevaSolicitud(solicitudEvent);
