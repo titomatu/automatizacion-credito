@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,6 +15,8 @@ import java.util.Date;
 @AllArgsConstructor
 @Embeddable
 public class InformacionAportesId implements Serializable {
+    @Column(name = "id")
+    private Integer id;
 
     @Column(name = "tipo_documento")
     private String tipoDocumento;

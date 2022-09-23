@@ -24,7 +24,7 @@ public class AportesLineaService {
 
         dto.setNumeroSolicitud(solicitudEvent.getSolicitudDto().getNumeroSolicitud());
         dto.setPromedioAportes(
-                repository.findByTipoDocumentoAndNumeroDocumento(solicitudEvent.getSolicitudDto().getClienteDto().getTipoDocumento(),
+                repository.findByAportesId_TipoDocumentoAndAportesId_NumeroDocumento(solicitudEvent.getSolicitudDto().getClienteDto().getTipoDocumento(),
                         solicitudEvent.getSolicitudDto().getClienteDto().getNumeroDocumento()
                 ).stream().collect(Collectors.averagingDouble(InformacionAportes::getPagoRealizado))
         );
