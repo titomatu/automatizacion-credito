@@ -1,4 +1,4 @@
-package edu.patrones.demo.solicitudservice.pages;
+package edu.patrones.demo.solicitudservice.gui.pages;
 
 import org.openqa.selenium.WebDriver;
 

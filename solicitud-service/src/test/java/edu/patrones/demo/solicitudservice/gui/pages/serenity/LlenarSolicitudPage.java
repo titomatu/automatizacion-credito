@@ -1,4 +1,4 @@
-package edu.patrones.demo.solicitudservice.pages.serenity;
+package edu.patrones.demo.solicitudservice.gui.pages.serenity;
 
 import net.thucydides.core.pages.PageObject;
 import org.openqa.selenium.By;

@@ -1,4 +1,4 @@
-package edu.patrones.demo.solicitudservice;
+package edu.patrones.demo.solicitudservice.gui;
 
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;

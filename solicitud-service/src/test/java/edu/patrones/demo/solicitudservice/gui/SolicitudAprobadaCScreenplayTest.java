@@ -1,14 +1,15 @@
-package edu.patrones.demo.solicitudservice;
+package edu.patrones.demo.solicitudservice.gui;
 
 import edu.patrones.demo.event.aportes.AportesLineaStatus;
 import edu.patrones.demo.event.centrales.CentralesStatus;
 import edu.patrones.demo.event.estudio.EstudioStatus;
 import edu.patrones.demo.event.rnec.RNECStatus;
 import edu.patrones.demo.event.solicitud.SolicitudStatus;
+import edu.patrones.demo.solicitudservice.gui.screenplay.*;
 import edu.patrones.demo.solicitudservice.model.ClienteId;
 import edu.patrones.demo.solicitudservice.model.Solicitud;
 import edu.patrones.demo.solicitudservice.repository.SolicitudRepository;
-import edu.patrones.demo.solicitudservice.screenplay.*;
+import edu.patrones.demo.solicitudservice.gui.screenplay.*;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;

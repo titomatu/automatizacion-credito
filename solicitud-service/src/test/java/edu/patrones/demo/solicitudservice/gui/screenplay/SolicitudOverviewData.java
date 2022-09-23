@@ -1,4 +1,4 @@
-package edu.patrones.demo.solicitudservice.screenplay;
+package edu.patrones.demo.solicitudservice.gui.screenplay;
 
 import edu.patrones.demo.event.aportes.AportesLineaStatus;
 import edu.patrones.demo.event.centrales.CentralesStatus;

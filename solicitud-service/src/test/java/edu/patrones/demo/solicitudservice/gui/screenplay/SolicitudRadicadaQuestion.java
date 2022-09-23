@@ -1,6 +1,6 @@
-package edu.patrones.demo.solicitudservice.screenplay;
+package edu.patrones.demo.solicitudservice.gui.screenplay;
 
-import edu.patrones.demo.solicitudservice.pages.serenity.LlenarSolicitudPage;
+import edu.patrones.demo.solicitudservice.gui.pages.serenity.LlenarSolicitudPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
