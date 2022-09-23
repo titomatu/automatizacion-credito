@@ -13,5 +13,5 @@ import java.util.List;
 @Repository
 public interface AportesLineaRepository extends JpaRepository<InformacionAportes, InformacionAportesId> {
 
-    List<InformacionAportes> findByTipoDocumentoAndNumeroDocumento(String tipoDocumento, Long numeroDocumento);
+    List<InformacionAportes> findByAportesId_TipoDocumentoAndAportesId_NumeroDocumento(String tipoDocumento, Long numeroDocumento);
 }
