@@ -1,4 +1,4 @@
-package edu.patrones.demo.centralesservice.processor;
+package edu.patrones.demo.centralesservice.unit;
 
 import edu.patrones.demo.centralesservice.model.Usuario;
 import edu.patrones.demo.centralesservice.model.UsuarioId;
