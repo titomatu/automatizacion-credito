@@ -66,7 +66,8 @@ public class SolicitudStatusUpdateEventHandler {
                     SolicitudStatus.SOLICITUD_APROBADA : SolicitudStatus.SOLICITUD_RECHAZADA;
             solicitud.setSolicitudStatus(terminadaStatus);
 
-            EmailDto emailDto = new EmailDto();
+            mensajeEmail(solicitud);
+            /*EmailDto emailDto = new EmailDto();
             NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
 
             emailDto.setTo(solicitud.getCliente().getCorreoElectronico());
@@ -75,7 +76,7 @@ public class SolicitudStatusUpdateEventHandler {
 
             producerTemplate.start();
             producerTemplate.requestBody("direct:correo", emailDto, InputStream.class);
-            producerTemplate.stop();
+            producerTemplate.stop();*/
             log.warn("SOLICITUD TERMINADA");
         } else {
             this.publisher.publishSolicitudEvent(convertEntityToDto(solicitud), solicitudStatus);
@@ -103,5 +104,26 @@ public class SolicitudStatusUpdateEventHandler {
 
         return solicitudDto;
     }
+    public void mensajeEmail(Solicitud solicitud){
+        EmailDto emailDto = new EmailDto();
+        NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
+        try {
+            if(SolicitudStatus.SOLICITUD_RECHAZADA.equals(solicitud.getSolicitudStatus())){
+                emailDto.setTo(solicitud.getCliente().getCorreoElectronico());
+                emailDto.setSubject("Respuesta Solicitud Crédito");
+                emailDto.setText("Solicitud de credito : " + solicitud.getSolicitudStatus());
 
+            }else {
+                emailDto.setTo(solicitud.getCliente().getCorreoElectronico());
+                emailDto.setSubject("Respuesta Solicitud Crédito");
+                emailDto.setText("Solicitud de Crédito : " + solicitud.getSolicitudStatus() + " por un valor de: " + nf.format(solicitud.getValorAprobado()) + "y cuota mensual de: " + nf.format(solicitud.getCuotaCalculada()));
+            }
+            producerTemplate.start();
+            producerTemplate.requestBody("direct:correo", emailDto, InputStream.class);
+            producerTemplate.stop();
+            log.warn("SOLICITUD TERMINADA");
+        }catch (Exception e){
+            log.warn("Error en envio de correo electronico ");
+        }
+    }
 }
