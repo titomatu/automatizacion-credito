@@ -112,12 +112,15 @@ public class SolicitudStatusUpdateEventHandler {
             if(SolicitudStatus.SOLICITUD_RECHAZADA.equals(solicitud.getSolicitudStatus())){
                 emailDto.setTo(solicitud.getCliente().getCorreoElectronico());
                 emailDto.setSubject("Respuesta Solicitud Crédito");
-                emailDto.setText("Solicitud de credito : " + solicitud.getSolicitudStatus());
+                emailDto.setText("Apreciado cliente su Solicitud de preoferta de Crédito fue : " + solicitud.getSolicitudStatus());
 
             }else {
                 emailDto.setTo(solicitud.getCliente().getCorreoElectronico());
                 emailDto.setSubject("Respuesta Solicitud Crédito");
-                emailDto.setText("Solicitud de Crédito : " + solicitud.getSolicitudStatus() + " por un valor de: " + nf.format(solicitud.getValorAprobado()) + "y cuota mensual de: " + nf.format(solicitud.getCuotaCalculada()));
+                emailDto.setText("Apreciado cliente tiene una preoferta de Crédito : " + solicitud.getSolicitudStatus() + " por un valor de: " +
+                                  nf.format(solicitud.getValorAprobado()) + " y con una cuota mensual aproximada de: " + nf.format(solicitud.getCuotaCalculada()) +
+                                  "\n\nDentro de poco será contactado por uno de nuestros asesores."  );
+
             }
             producerTemplate.start();
             producerTemplate.requestBody("direct:correo", emailDto, InputStream.class);
