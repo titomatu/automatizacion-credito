@@ -1,6 +1,10 @@
 package edu.patrones.demo.unit;
 
 import edu.patrones.demo.dto.*;
+import edu.patrones.demo.event.aportes.AportesLineaEvent;
+import edu.patrones.demo.event.aportes.AportesLineaStatus;
+import edu.patrones.demo.event.centrales.CentralesEvent;
+import edu.patrones.demo.event.centrales.CentralesStatus;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
@@ -702,5 +706,36 @@ public class CommonDtoModelTest {
         assertThat(otpResponseDto.equals(otpResponseDto1)).isFalse();
         assertThat(otpResponseDto.hashCode()).isNotEqualTo(otpResponseDto1.hashCode());
         assertThat(otpResponseDto.toString()).isNotEqualTo(otpResponseDto1.toString());
+    }
+
+    @Test
+    void testAportesLineaEventNotEqual(){
+        String numeroSol = UUID.randomUUID().toString();
+        AportesLineaDto aportesLineaDto = new AportesLineaDto();
+        aportesLineaDto.setNumeroSolicitud(numeroSol);
+        aportesLineaDto.setPromedioAportes(15000000D);
+
+        AportesLineaEvent aportesLineaEvent = new AportesLineaEvent(aportesLineaDto, AportesLineaStatus.APORTES_LINEA_VALIDADO);
+        AportesLineaEvent aportesLineaEvent1 = new AportesLineaEvent(aportesLineaDto, null);
+
+        assertThat(aportesLineaEvent.equals(aportesLineaEvent1)).isFalse();
+        assertThat(aportesLineaEvent.hashCode()).isNotEqualTo(aportesLineaEvent1.hashCode());
+        assertThat(aportesLineaEvent.toString()).isNotEqualTo(aportesLineaEvent1.toString());
+
+    }
+
+    @Test
+    void testCentrakesEventNotEqual(){
+        String numeroSol = UUID.randomUUID().toString();
+
+        CentralesRequestDto centralesRequestDto = new CentralesRequestDto(numeroSol, "S");
+
+        CentralesEvent centralesEvent = new CentralesEvent(centralesRequestDto, CentralesStatus.CENTRALES_COMPLETADO);
+        CentralesEvent centralesEvent1 = new CentralesEvent(centralesRequestDto, null);
+
+        assertThat(centralesEvent.equals(centralesRequestDto)).isFalse();
+        assertThat(centralesEvent.hashCode()).isNotEqualTo(centralesRequestDto.hashCode());
+        assertThat(centralesEvent.toString()).isNotEqualTo(centralesRequestDto.toString());
+
     }
 }
