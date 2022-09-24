@@ -63,6 +63,7 @@ public class EstudioService {
             motorReglaResponseDto = objectMapper.readValue(respuesta, MotorReglaResponseDto.class);
         } catch(JsonProcessingException e){
             log.error("Error {}", e.getMessage());
+            motorReglaResponseDto.setCodeRespuesta(9999);
         }
 
         log.warn("Respuesta Motor Reglas: " + motorReglaResponseDto);

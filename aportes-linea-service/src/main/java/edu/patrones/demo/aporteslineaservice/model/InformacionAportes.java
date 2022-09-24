@@ -15,18 +15,9 @@ import java.util.Date;
 @Table(name = "Aportes_Linea")
 public class InformacionAportes {
 
-    @Id
+    @EmbeddedId
     @Column(name = "id")
-    private Long aportesId;
-
-    @Column(name = "tipo_documento")
-    private String tipoDocumento;
-
-    @Column(name = "numero_documento")
-    private Long numeroDocumento;
-
-    @Column(name = "fecha_pago")
-    private Date fecha_pago;
+    private InformacionAportesId aportesId;
 
     @Column(name = "pago_realizado")
     private Double pagoRealizado;
