@@ -66,7 +66,8 @@ public class SolicitudStatusUpdateEventHandler {
                     SolicitudStatus.SOLICITUD_APROBADA : SolicitudStatus.SOLICITUD_RECHAZADA;
             solicitud.setSolicitudStatus(terminadaStatus);
 
-            EmailDto emailDto = new EmailDto();
+            mensajeEmail(solicitud);
+            /*EmailDto emailDto = new EmailDto();
             NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
 
             emailDto.setTo(solicitud.getCliente().getCorreoElectronico());
@@ -75,7 +76,7 @@ public class SolicitudStatusUpdateEventHandler {
 
             producerTemplate.start();
             producerTemplate.requestBody("direct:correo", emailDto, InputStream.class);
-            producerTemplate.stop();
+            producerTemplate.stop();*/
             log.warn("SOLICITUD TERMINADA");
         } else {
             this.publisher.publishSolicitudEvent(convertEntityToDto(solicitud), solicitudStatus);
@@ -104,4 +105,29 @@ public class SolicitudStatusUpdateEventHandler {
         return solicitudDto;
     }
 
+    public void mensajeEmail(Solicitud solicitud){
+        EmailDto emailDto = new EmailDto();
+        NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
+        try {
+            if(SolicitudStatus.SOLICITUD_RECHAZADA.equals(solicitud.getSolicitudStatus())){
+                emailDto.setTo(solicitud.getCliente().getCorreoElectronico());
+                emailDto.setSubject("Respuesta Solicitud Crédito");
+                emailDto.setText("Apreciado cliente su Solicitud de preoferta de Crédito fue : " + solicitud.getSolicitudStatus());
+
+            }else {
+                emailDto.setTo(solicitud.getCliente().getCorreoElectronico());
+                emailDto.setSubject("Respuesta Solicitud Crédito");
+                emailDto.setText("Apreciado cliente tiene una preoferta de Crédito : " + solicitud.getSolicitudStatus() + " por un valor de: " +
+                                  nf.format(solicitud.getValorAprobado()) + " y con una cuota mensual aproximada de: " + nf.format(solicitud.getCuotaCalculada()) +
+                                  "\n\nDentro de poco será contactado por uno de nuestros asesores."  );
+
+            }
+            producerTemplate.start();
+            producerTemplate.requestBody("direct:correo", emailDto, InputStream.class);
+            producerTemplate.stop();
+            log.warn("SOLICITUD TERMINADA");
+        }catch (Exception e){
+            log.warn("Error en envio de correo electronico ");
+        }
+    }
 }
