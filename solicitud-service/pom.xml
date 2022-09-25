@@ -236,7 +236,7 @@
                 <version>3.0.0-M7</version>
                 <configuration>
                     <properties>
-                        <test>edu.patrones.demo.solicitudservice.SolicitudOfertaTestSuite</test>
+                        <test>edu.patrones.demo.solicitudservice.gui.SolicitudOfertaTestSuite</test>
                         <skip>true</skip>
                         <testFailureIgnore>true</testFailureIgnore>
                         <configurationParameters>
@@ -322,6 +322,31 @@
                         <phase>post-integration-test</phase>
                         <goals>
                             <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.8</version>
+                <configuration>
+                    <output>file</output>
+                    <append>true</append>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report-aggregate</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
