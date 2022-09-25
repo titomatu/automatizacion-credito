@@ -67,16 +67,6 @@ public class SolicitudStatusUpdateEventHandler {
             solicitud.setSolicitudStatus(terminadaStatus);
 
             mensajeEmail(solicitud);
-            /*EmailDto emailDto = new EmailDto();
-            NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
-
-            emailDto.setTo(solicitud.getCliente().getCorreoElectronico());
-            emailDto.setSubject("Respuesta Solicitud Crédito");
-            emailDto.setText("La respuesta de su solicitud de credito es: " + solicitud.getSolicitudStatus() + " por un valor de: " + nf.format(solicitud.getValorAprobado()));
-
-            producerTemplate.start();
-            producerTemplate.requestBody("direct:correo", emailDto, InputStream.class);
-            producerTemplate.stop();*/
             log.warn("SOLICITUD TERMINADA");
         } else {
             this.publisher.publishSolicitudEvent(convertEntityToDto(solicitud), solicitudStatus);
@@ -115,12 +105,20 @@ public class SolicitudStatusUpdateEventHandler {
                 emailDto.setText("Apreciado cliente su Solicitud de preoferta de Crédito fue : " + solicitud.getSolicitudStatus());
 
             }else {
-                emailDto.setTo(solicitud.getCliente().getCorreoElectronico());
-                emailDto.setSubject("Respuesta Solicitud Crédito");
-                emailDto.setText("Apreciado cliente tiene una preoferta de Crédito : " + solicitud.getSolicitudStatus() + " por un valor de: " +
+                if (solicitud.getValorAprobado() == 1500000){
+                    emailDto.setTo(solicitud.getCliente().getCorreoElectronico());
+                    emailDto.setSubject("Respuesta Solicitud Crédito");
+                    emailDto.setText("Apreciado cliente su preoferta de Crédito fue : " + solicitud.getSolicitudStatus() + " por un valor de: " +
+                            nf.format(solicitud.getValorAprobado()) + " y con una cuota mensual aproximada de: " + nf.format(solicitud.getCuotaCalculada()) +
+                            "\n\nDentro de poco será contactado por uno de nuestros asesores."  );
+
+                }else{
+                    emailDto.setTo(solicitud.getCliente().getCorreoElectronico());
+                    emailDto.setSubject("Respuesta Solicitud Crédito");
+                    emailDto.setText("Apreciado cliente tiene una preoferta de Crédito : " + solicitud.getSolicitudStatus() + " por un valor de: " +
                                   nf.format(solicitud.getValorAprobado()) + " y con una cuota mensual aproximada de: " + nf.format(solicitud.getCuotaCalculada()) +
                                   "\n\nDentro de poco será contactado por uno de nuestros asesores."  );
-
+                }
             }
             producerTemplate.start();
             producerTemplate.requestBody("direct:correo", emailDto, InputStream.class);
