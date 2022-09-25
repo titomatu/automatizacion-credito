@@ -40,7 +40,7 @@ public class ReglasNegocioControllerTest {
         motorReglaRequestDto.setValorSolicitado(80000000D);
         motorReglaRequestDto.setPlazo(60);
         motorReglaRequestDto.setNumeroSolicitud("a4845166-668b-40fe-8428-3173e429de08");
-        motorReglaRequestDto.setGastos(1600000.0);
+        motorReglaRequestDto.setGastos(1400000.0);
 
         MotorReglaResponseDto motorReglaResponseDto = reglasNegocioController.getDiscountPercent(motorReglaRequestDto);
 
@@ -82,10 +82,10 @@ public class ReglasNegocioControllerTest {
         motorReglaRequestDto.setAprobadoCentral("S");
         motorReglaRequestDto.setSalarioMensual(8000000.0);
         motorReglaRequestDto.setSalarioAportes(4500000.0);
-        motorReglaRequestDto.setValorSolicitado(10000000.0);
+        motorReglaRequestDto.setValorSolicitado(50000000.0);
         motorReglaRequestDto.setPlazo(60);
         motorReglaRequestDto.setNumeroSolicitud("a4845166-668b-40fe-8428-3173e429de08");
-        motorReglaRequestDto.setGastos(2000000.0);
+        motorReglaRequestDto.setGastos(600000.0);
         MotorReglaResponseDto motorReglaResponseDto = this.reglasNegocioController.getDiscountPercent(motorReglaRequestDto);
         Assertions.assertThat(motorReglaResponseDto.getValorAprobado()).isEqualTo(0L);
     }
