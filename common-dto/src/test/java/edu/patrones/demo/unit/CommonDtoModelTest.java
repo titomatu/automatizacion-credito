@@ -5,6 +5,12 @@ import edu.patrones.demo.event.aportes.AportesLineaEvent;
 import edu.patrones.demo.event.aportes.AportesLineaStatus;
 import edu.patrones.demo.event.centrales.CentralesEvent;
 import edu.patrones.demo.event.centrales.CentralesStatus;
+import edu.patrones.demo.event.estudio.EstudioEvent;
+import edu.patrones.demo.event.estudio.EstudioStatus;
+import edu.patrones.demo.event.rnec.RNECEvent;
+import edu.patrones.demo.event.rnec.RNECStatus;
+import edu.patrones.demo.event.solicitud.SolicitudEvent;
+import edu.patrones.demo.event.solicitud.SolicitudStatus;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
@@ -709,6 +715,25 @@ public class CommonDtoModelTest {
     }
 
     @Test
+    void testAportesLineaEvent(){
+        String numeroSol = UUID.randomUUID().toString();
+        AportesLineaDto aportesLineaDto = new AportesLineaDto();
+        aportesLineaDto.setNumeroSolicitud(numeroSol);
+        aportesLineaDto.setPromedioAportes(15000000D);
+
+        AportesLineaEvent aportesLineaEvent = new AportesLineaEvent();
+        aportesLineaEvent.setAportesLineaDto(aportesLineaDto);
+        aportesLineaEvent.setAportesLineaStatus(AportesLineaStatus.APORTES_LINEA_VALIDADO);
+
+        AportesLineaEvent aportesLineaEvent1 = aportesLineaEvent;
+
+        assertThat(aportesLineaEvent.equals(aportesLineaEvent1)).isTrue();
+        assertThat(aportesLineaEvent.hashCode()).isEqualTo(aportesLineaEvent1.hashCode());
+        assertThat(aportesLineaEvent.toString()).isEqualTo(aportesLineaEvent1.toString());
+
+    }
+
+    @Test
     void testAportesLineaEventNotEqual(){
         String numeroSol = UUID.randomUUID().toString();
         AportesLineaDto aportesLineaDto = new AportesLineaDto();
@@ -723,9 +748,25 @@ public class CommonDtoModelTest {
         assertThat(aportesLineaEvent.toString()).isNotEqualTo(aportesLineaEvent1.toString());
 
     }
+    @Test
+    void testCentralesEvent(){
+        String numeroSol = UUID.randomUUID().toString();
+
+        CentralesRequestDto centralesRequestDto = new CentralesRequestDto(numeroSol, "S");
+
+        CentralesEvent centralesEvent = new CentralesEvent();
+        centralesEvent.setCentralesRequestDto(centralesRequestDto);
+        centralesEvent.setCentralesStatus(CentralesStatus.CENTRALES_COMPLETADO);
+        CentralesEvent centralesEvent1 = centralesEvent;
+
+        assertThat(centralesEvent.equals(centralesEvent1)).isTrue();
+        assertThat(centralesEvent.hashCode()).isEqualTo(centralesEvent1.hashCode());
+        assertThat(centralesEvent.toString()).isEqualTo(centralesEvent1.toString());
+
+    }
 
     @Test
-    void testCentrakesEventNotEqual(){
+    void testCentralesEventNotEqual(){
         String numeroSol = UUID.randomUUID().toString();
 
         CentralesRequestDto centralesRequestDto = new CentralesRequestDto(numeroSol, "S");
@@ -733,9 +774,291 @@ public class CommonDtoModelTest {
         CentralesEvent centralesEvent = new CentralesEvent(centralesRequestDto, CentralesStatus.CENTRALES_COMPLETADO);
         CentralesEvent centralesEvent1 = new CentralesEvent(centralesRequestDto, null);
 
-        assertThat(centralesEvent.equals(centralesRequestDto)).isFalse();
-        assertThat(centralesEvent.hashCode()).isNotEqualTo(centralesRequestDto.hashCode());
-        assertThat(centralesEvent.toString()).isNotEqualTo(centralesRequestDto.toString());
+        assertThat(centralesEvent.equals(centralesEvent1)).isFalse();
+        assertThat(centralesEvent.hashCode()).isNotEqualTo(centralesEvent1.hashCode());
+        assertThat(centralesEvent.toString()).isNotEqualTo(centralesEvent1.toString());
 
+    }
+
+    @Test
+    void testRNECEvent(){
+        String uuid = UUID.randomUUID().toString();
+
+        RNECRequestDto rnecRequestDto = new RNECRequestDto(uuid);
+
+        RNECEvent rnecEvent = new RNECEvent();
+        rnecEvent.setRnecStatus(RNECStatus.RNEC_COMPLETADO);
+        rnecEvent.setRnecRequestDto(rnecRequestDto);
+
+        RNECEvent rnecEvent1 = rnecEvent;
+
+        assertThat(rnecEvent.equals(rnecEvent1)).isTrue();
+        assertThat(rnecEvent.hashCode()).isEqualTo(rnecEvent1.hashCode());
+        assertThat(rnecEvent.toString()).isEqualTo(rnecEvent1.toString());
+    }
+
+    @Test
+    void testRNECEventNotEqual(){
+        String uuid = UUID.randomUUID().toString();
+
+        RNECRequestDto rnecRequestDto = new RNECRequestDto(uuid);
+
+        RNECEvent rnecEvent = new RNECEvent(rnecRequestDto, RNECStatus.RNEC_COMPLETADO);
+        RNECEvent rnecEvent1 = new RNECEvent(rnecRequestDto, RNECStatus.RNEC_COMPLETADO);
+
+        assertThat(rnecEvent.equals(rnecEvent1)).isFalse();
+        assertThat(rnecEvent.hashCode()).isNotEqualTo(rnecEvent1.hashCode());
+        assertThat(rnecEvent.toString()).isNotEqualTo(rnecEvent1.toString());
+    }
+
+    @Test
+    void testEstudioEvent() throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy", Locale.ENGLISH);
+
+        ClienteDto clienteDto = new ClienteDto();
+
+        clienteDto.setTipoDocumento("CC");
+        clienteDto.setNumeroDocumento(12345678999L);
+        clienteDto.setFechaExpedicion(formatter.parse("27-12-2007"));
+        clienteDto.setNombre1("NOMBRE 1");
+        clienteDto.setNombre2("NOMBRE 2");
+        clienteDto.setApellido1("APELLIDO 1");
+        clienteDto.setApellido2("APELLIDO 2");
+        clienteDto.setCelular(12345789L);
+        clienteDto.setCorreoElectronico("titomaturanad@javeriana.edu.co");
+        clienteDto.setSalarioMensual(8000000D);
+        clienteDto.setFechaNacimiento(formatter.parse("09-09-1988"));
+        clienteDto.setGastos(1600000D);
+        clienteDto.setTotalActivos(50000000D);
+        clienteDto.setTotalPasivos(30000000D);
+        clienteDto.setAutorizaCentrales("S");
+        clienteDto.setGenero("X");
+        clienteDto.setTipoResidencia("F");
+        clienteDto.setActividadEconomica(2);
+        clienteDto.setTipoContrato("I");
+        clienteDto.setNivelEstudios("U");
+        clienteDto.setTipoInmueble("A");
+        clienteDto.setEstadoCivil("C");
+
+        SolicitudDto solicitudDto = new SolicitudDto();
+
+        solicitudDto.setClienteDto(clienteDto);
+        solicitudDto.setPlazo(60);
+        solicitudDto.setValorSolicitado(50000000D);
+        solicitudDto.setPromedioAportes(9500000D);
+        solicitudDto.setReportado("S");
+        solicitudDto.setValorAprobado(0D);
+        solicitudDto.setMensaje("");
+        solicitudDto.setNumeroSolicitud("");
+
+        EstudioRequestDto estudioRequestDto = new EstudioRequestDto(solicitudDto);
+
+
+        String uuid = UUID.randomUUID().toString();
+
+        MotorReglaResponseDto motorReglaResponseDto = new MotorReglaResponseDto();
+        motorReglaResponseDto.setNumeroSolicitud(uuid);
+        motorReglaResponseDto.setCodeRespuesta(9990);
+        motorReglaResponseDto.setValorAprobado(15000000L);
+        motorReglaResponseDto.setValorCuota(550000D);
+        motorReglaResponseDto.setTasaCalculada(2.7D);
+        motorReglaResponseDto.setMensajeS("OK");
+
+        EstudioEvent estudioEvent = new EstudioEvent();
+        estudioEvent.setEstudioStatus(EstudioStatus.ESTUDIO_APROBADO);
+        estudioEvent.setMotorReglaResponseDto(motorReglaResponseDto);
+        estudioEvent.setEstudioRequestDto(estudioRequestDto);
+        EstudioEvent estudioEvent1 = estudioEvent;
+
+        assertThat(estudioEvent.equals(estudioEvent1)).isTrue();
+        assertThat(estudioEvent.hashCode()).isEqualTo(estudioEvent1.hashCode());
+        assertThat(estudioEvent.toString()).isEqualTo(estudioEvent1.toString());
+    }
+
+    @Test
+    void testEstudioEventNotEqual() throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy", Locale.ENGLISH);
+
+        ClienteDto clienteDto = new ClienteDto();
+
+        clienteDto.setTipoDocumento("CC");
+        clienteDto.setNumeroDocumento(12345678999L);
+        clienteDto.setFechaExpedicion(formatter.parse("27-12-2007"));
+        clienteDto.setNombre1("NOMBRE 1");
+        clienteDto.setNombre2("NOMBRE 2");
+        clienteDto.setApellido1("APELLIDO 1");
+        clienteDto.setApellido2("APELLIDO 2");
+        clienteDto.setCelular(12345789L);
+        clienteDto.setCorreoElectronico("titomaturanad@javeriana.edu.co");
+        clienteDto.setSalarioMensual(8000000D);
+        clienteDto.setFechaNacimiento(formatter.parse("09-09-1988"));
+        clienteDto.setGastos(1600000D);
+        clienteDto.setTotalActivos(50000000D);
+        clienteDto.setTotalPasivos(30000000D);
+        clienteDto.setAutorizaCentrales("S");
+        clienteDto.setGenero("X");
+        clienteDto.setTipoResidencia("F");
+        clienteDto.setActividadEconomica(2);
+        clienteDto.setTipoContrato("I");
+        clienteDto.setNivelEstudios("U");
+        clienteDto.setTipoInmueble("A");
+        clienteDto.setEstadoCivil("C");
+
+        SolicitudDto solicitudDto = new SolicitudDto();
+
+        solicitudDto.setClienteDto(clienteDto);
+        solicitudDto.setPlazo(60);
+        solicitudDto.setValorSolicitado(50000000D);
+        solicitudDto.setPromedioAportes(9500000D);
+        solicitudDto.setReportado("S");
+        solicitudDto.setValorAprobado(0D);
+        solicitudDto.setMensaje("");
+        solicitudDto.setNumeroSolicitud("");
+
+        EstudioRequestDto estudioRequestDto = new EstudioRequestDto(solicitudDto);
+
+
+        String uuid = UUID.randomUUID().toString();
+
+        MotorReglaResponseDto motorReglaResponseDto = new MotorReglaResponseDto();
+        motorReglaResponseDto.setNumeroSolicitud(uuid);
+        motorReglaResponseDto.setCodeRespuesta(9990);
+        motorReglaResponseDto.setValorAprobado(15000000L);
+        motorReglaResponseDto.setValorCuota(550000D);
+        motorReglaResponseDto.setTasaCalculada(2.7D);
+        motorReglaResponseDto.setMensajeS("OK");
+
+        EstudioEvent estudioEvent = new EstudioEvent(estudioRequestDto, motorReglaResponseDto, EstudioStatus.ESTUDIO_APROBADO);
+        EstudioEvent estudioEvent1 = new EstudioEvent(estudioRequestDto, motorReglaResponseDto, EstudioStatus.ESTUDIO_APROBADO);;
+
+        assertThat(estudioEvent.equals(estudioEvent1)).isFalse();
+        assertThat(estudioEvent.hashCode()).isNotEqualTo(estudioEvent1.hashCode());
+        assertThat(estudioEvent.toString()).isNotEqualTo(estudioEvent1.toString());
+    }
+
+    @Test
+    void testSolicitudEvent() throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy", Locale.ENGLISH);
+
+        ClienteDto clienteDto = new ClienteDto();
+
+        clienteDto.setTipoDocumento("CC");
+        clienteDto.setNumeroDocumento(12345678999L);
+        clienteDto.setFechaExpedicion(formatter.parse("27-12-2007"));
+        clienteDto.setNombre1("NOMBRE 1");
+        clienteDto.setNombre2("NOMBRE 2");
+        clienteDto.setApellido1("APELLIDO 1");
+        clienteDto.setApellido2("APELLIDO 2");
+        clienteDto.setCelular(12345789L);
+        clienteDto.setCorreoElectronico("titomaturanad@javeriana.edu.co");
+        clienteDto.setSalarioMensual(8000000D);
+        clienteDto.setFechaNacimiento(formatter.parse("09-09-1988"));
+        clienteDto.setGastos(1600000D);
+        clienteDto.setTotalActivos(50000000D);
+        clienteDto.setTotalPasivos(30000000D);
+        clienteDto.setAutorizaCentrales("S");
+        clienteDto.setGenero("X");
+        clienteDto.setTipoResidencia("F");
+        clienteDto.setActividadEconomica(2);
+        clienteDto.setTipoContrato("I");
+        clienteDto.setNivelEstudios("U");
+        clienteDto.setTipoInmueble("A");
+        clienteDto.setEstadoCivil("C");
+
+        SolicitudDto solicitudDto = new SolicitudDto();
+
+        solicitudDto.setClienteDto(clienteDto);
+        solicitudDto.setPlazo(60);
+        solicitudDto.setValorSolicitado(50000000D);
+        solicitudDto.setPromedioAportes(9500000D);
+        solicitudDto.setReportado("S");
+        solicitudDto.setValorAprobado(0D);
+        solicitudDto.setMensaje("");
+        solicitudDto.setNumeroSolicitud("");
+
+        EstudioRequestDto estudioRequestDto = new EstudioRequestDto(solicitudDto);
+
+
+        String uuid = UUID.randomUUID().toString();
+
+        MotorReglaResponseDto motorReglaResponseDto = new MotorReglaResponseDto();
+        motorReglaResponseDto.setNumeroSolicitud(uuid);
+        motorReglaResponseDto.setCodeRespuesta(9990);
+        motorReglaResponseDto.setValorAprobado(15000000L);
+        motorReglaResponseDto.setValorCuota(550000D);
+        motorReglaResponseDto.setTasaCalculada(2.7D);
+        motorReglaResponseDto.setMensajeS("OK");
+
+        SolicitudEvent solicitudEvent = new SolicitudEvent();
+        solicitudEvent.setSolicitudDto(solicitudDto);
+        solicitudEvent.setSolicitudStatus(SolicitudStatus.SOLICITUD_CREADA);
+        SolicitudEvent solicitudEvent1 = solicitudEvent;
+
+        assertThat(solicitudEvent.equals(solicitudEvent1)).isTrue();
+        assertThat(solicitudEvent.hashCode()).isEqualTo(solicitudEvent1.hashCode());
+        assertThat(solicitudEvent.toString()).isEqualTo(solicitudEvent1.toString());
+    }
+
+    @Test
+    void testSolicitudEventNotEqual() throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy", Locale.ENGLISH);
+
+        ClienteDto clienteDto = new ClienteDto();
+
+        clienteDto.setTipoDocumento("CC");
+        clienteDto.setNumeroDocumento(12345678999L);
+        clienteDto.setFechaExpedicion(formatter.parse("27-12-2007"));
+        clienteDto.setNombre1("NOMBRE 1");
+        clienteDto.setNombre2("NOMBRE 2");
+        clienteDto.setApellido1("APELLIDO 1");
+        clienteDto.setApellido2("APELLIDO 2");
+        clienteDto.setCelular(12345789L);
+        clienteDto.setCorreoElectronico("titomaturanad@javeriana.edu.co");
+        clienteDto.setSalarioMensual(8000000D);
+        clienteDto.setFechaNacimiento(formatter.parse("09-09-1988"));
+        clienteDto.setGastos(1600000D);
+        clienteDto.setTotalActivos(50000000D);
+        clienteDto.setTotalPasivos(30000000D);
+        clienteDto.setAutorizaCentrales("S");
+        clienteDto.setGenero("X");
+        clienteDto.setTipoResidencia("F");
+        clienteDto.setActividadEconomica(2);
+        clienteDto.setTipoContrato("I");
+        clienteDto.setNivelEstudios("U");
+        clienteDto.setTipoInmueble("A");
+        clienteDto.setEstadoCivil("C");
+
+        SolicitudDto solicitudDto = new SolicitudDto();
+
+        solicitudDto.setClienteDto(clienteDto);
+        solicitudDto.setPlazo(60);
+        solicitudDto.setValorSolicitado(50000000D);
+        solicitudDto.setPromedioAportes(9500000D);
+        solicitudDto.setReportado("S");
+        solicitudDto.setValorAprobado(0D);
+        solicitudDto.setMensaje("");
+        solicitudDto.setNumeroSolicitud("");
+
+        EstudioRequestDto estudioRequestDto = new EstudioRequestDto(solicitudDto);
+
+
+        String uuid = UUID.randomUUID().toString();
+
+        MotorReglaResponseDto motorReglaResponseDto = new MotorReglaResponseDto();
+        motorReglaResponseDto.setNumeroSolicitud(uuid);
+        motorReglaResponseDto.setCodeRespuesta(9990);
+        motorReglaResponseDto.setValorAprobado(15000000L);
+        motorReglaResponseDto.setValorCuota(550000D);
+        motorReglaResponseDto.setTasaCalculada(2.7D);
+        motorReglaResponseDto.setMensajeS("OK");
+
+        SolicitudEvent solicitudEvent = new SolicitudEvent();
+        solicitudEvent.setSolicitudDto(solicitudDto);
+        solicitudEvent.setSolicitudStatus(SolicitudStatus.SOLICITUD_CREADA);
+        SolicitudEvent solicitudEvent1 = new SolicitudEvent(solicitudDto, SolicitudStatus.SOLICITUD_APROBADA);
+
+        assertThat(solicitudEvent.equals(solicitudEvent1)).isFalse();
+        assertThat(solicitudEvent.hashCode()).isNotEqualTo(solicitudEvent1.hashCode());
+        assertThat(solicitudEvent.toString()).isNotEqualTo(solicitudEvent1.toString());
     }
 }
