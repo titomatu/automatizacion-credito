@@ -22,6 +22,8 @@ pipeline {
                 sh 'mvn test -pl estudio-solicitud-service'
                 sh 'mvn clean install -pl registraduria-service'
                 sh 'mvn test -pl registraduria-service'
+                sh 'mvn clean install -pl common-dto'
+                sh 'mvn test -pl common-dto'
             }
        }
        stage('Pruebas Integración'){
