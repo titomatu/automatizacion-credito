@@ -12,14 +12,26 @@ pipeline {
        }
        stage('Pruebas Unitarias'){
             steps {
+                sh 'mvn clean install -pl aportes-linea-service'
+                sh 'mvn test -pl aportes-linea-service'
                 sh 'mvn clean install -pl centrales-service'
-                sh 'mvn test -Dtest=CentralesServiceTest -pl centrales-service'
+                sh 'mvn test -pl centrales-service'
+                sh 'mvn clean install -pl email-service'
+                sh 'mvn test -Dtest=EmailServiceTest -pl email-service'
+                sh 'mvn clean install -pl estudio-solicitud-service'
+                sh 'mvn test -pl estudio-solicitud-service'
+                sh 'mvn clean install -pl registraduria-service'
+                sh 'mvn test -pl registraduria-service'
+                sh 'mvn clean install -pl common-dto'
+                sh 'mvn test -pl common-dto'
             }
        }
        stage('Pruebas Integración'){
             steps {
                 sh 'mvn clean install -pl motor-reglas-service'
                 sh 'mvn test -Dtest=ReglasNegocioControllerTest -pl motor-reglas-service'
+                sh 'mvn clean install -pl email-service'
+                sh 'mvn test -Dtest=EmailControllerTest -pl email-service'
             }
        }
        stage('Reporte SonarQube'){
